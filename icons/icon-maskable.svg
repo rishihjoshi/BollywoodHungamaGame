@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Full-bleed background — no rounded corners so any Android mask shape works -->
+  <rect width="512" height="512" fill="#0D0D0D"/>
+  <!-- Content scaled and centered within 80% safe zone (102px padding on 512px canvas) -->
+  <g transform="translate(102, 102)">
+    <!-- Clapperboard body at 60% scale (308x308 canvas) -->
+    <rect x="10" y="80" width="288" height="210" rx="14" fill="#C0392B"/>
+    <!-- Body line accents -->
+    <rect x="10" y="142" width="288" height="3" fill="#A93226" opacity="0.6"/>
+    <rect x="10" y="186" width="288" height="3" fill="#A93226" opacity="0.6"/>
+    <rect x="10" y="230" width="288" height="3" fill="#A93226" opacity="0.6"/>
+    <!-- Clapper top bar base -->
+    <rect x="10" y="52" width="288" height="40" rx="6" fill="#1A1A1A"/>
+    <!-- Clapper stripes -->
+    <clipPath id="cm">
+      <rect x="10" y="52" width="288" height="40" rx="6"/>
+    </clipPath>
+    <g clip-path="url(#cm)">
+      <rect x="-10" y="36" width="42" height="72" transform="rotate(-20 20 72)"  fill="#FFD700"/>
+      <rect x="50"  y="36" width="42" height="72" transform="rotate(-20 70 72)"  fill="#FFD700"/>
+      <rect x="110" y="36" width="42" height="72" transform="rotate(-20 130 72)" fill="#FFD700"/>
+      <rect x="170" y="36" width="42" height="72" transform="rotate(-20 190 72)" fill="#FFD700"/>
+      <rect x="230" y="36" width="42" height="72" transform="rotate(-20 250 72)" fill="#FFD700"/>
+    </g>
+    <!-- Hinges -->
+    <circle cx="44"  cy="80" r="12" fill="#FFD700"/>
+    <circle cx="264" cy="80" r="12" fill="#FFD700"/>
+    <!-- BH text -->
+    <text x="154" y="208" font-family="Georgia,serif" font-size="76" font-weight="900"
+          fill="#FFD700" text-anchor="middle" dominant-baseline="middle" letter-spacing="4">BH</text>
+    <!-- Gold accent bar -->
+    <rect x="10" y="278" width="288" height="8" rx="4" fill="#FFD700"/>
+  </g>
+</svg>
