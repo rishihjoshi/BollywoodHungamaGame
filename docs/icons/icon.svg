@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <rect width="192" height="192" rx="24" fill="#0D0D0D"/>
+  <!-- Clapperboard body -->
+  <rect x="28" y="72" width="136" height="96" rx="8" fill="#C0392B"/>
+  <!-- Body highlight lines -->
+  <rect x="28" y="100" width="136" height="2" fill="#A93226" opacity="0.6"/>
+  <rect x="28" y="120" width="136" height="2" fill="#A93226" opacity="0.6"/>
+  <rect x="28" y="140" width="136" height="2" fill="#A93226" opacity="0.6"/>
+  <!-- Clapper top bar base -->
+  <rect x="28" y="52" width="136" height="28" rx="4" fill="#1A1A1A"/>
+  <!-- Clapper stripes (diagonal alternating) -->
+  <clipPath id="clip-top">
+    <rect x="28" y="52" width="136" height="28" rx="4"/>
+  </clipPath>
+  <g clip-path="url(#clip-top)">
+    <rect x="16"  y="44" width="20" height="44" transform="rotate(-20 26 66)"  fill="#FFD700"/>
+    <rect x="46"  y="44" width="20" height="44" transform="rotate(-20 56 66)"  fill="#FFD700"/>
+    <rect x="76"  y="44" width="20" height="44" transform="rotate(-20 86 66)"  fill="#FFD700"/>
+    <rect x="106" y="44" width="20" height="44" transform="rotate(-20 116 66)" fill="#FFD700"/>
+    <rect x="136" y="44" width="20" height="44" transform="rotate(-20 146 66)" fill="#FFD700"/>
+  </g>
+  <!-- Hinge dot left -->
+  <circle cx="44" cy="72" r="7" fill="#FFD700"/>
+  <!-- Hinge dot right -->
+  <circle cx="148" cy="72" r="7" fill="#FFD700"/>
+  <!-- BH text in body -->
+  <text x="96" y="132" font-family="Georgia, serif" font-size="36" font-weight="900"
+        fill="#FFD700" text-anchor="middle" dominant-baseline="middle"
+        letter-spacing="2">BH</text>
+  <!-- Gold bottom accent line -->
+  <rect x="28" y="160" width="136" height="4" rx="2" fill="#FFD700"/>
+</svg>

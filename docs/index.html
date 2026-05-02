@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Bollywood Hungama — the Bollywood party game of clues, bluffs and Naughty players">
+
+  <!-- iOS PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BH Game">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+  <!-- Android PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="BH Game">
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#FFD700">
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css">
+  <title>Bollywood Hungama</title>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <div id="app">
+
+    <!-- ======================================================
+         SCREEN: Home
+         ====================================================== -->
+    <div data-screen="screen-home" class="screen-active">
+      <div class="spacer"></div>
+      <div class="home-logo">
+        <img src="./icons/icon.svg" alt="Bollywood Hungama logo">
+      </div>
+      <h1 class="game-title">Bollywood<br>Hungama</h1>
+      <p class="game-tagline">The party game of Bollywood clues, bluffs &amp; Naughty players</p>
+      <div class="home-actions">
+        <button class="btn btn-primary" id="btn-start">Start Game</button>
+        <button class="btn btn-ghost" id="btn-how-to-play">How to Play</button>
+      </div>
+      <div class="spacer"></div>
+      <!-- Install hints -->
+      <div class="install-hint" id="android-install-hint">
+        <span class="install-hint-icon">📲</span>
+        <span>Tap <strong>Add to Home Screen</strong> to install the app</span>
+      </div>
+      <div class="install-hint" id="ios-install-hint">
+        <span class="install-hint-icon">📲</span>
+        <span>Tap the Share button then <strong>Add to Home Screen</strong></span>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Rules
+         ====================================================== -->
+    <div data-screen="screen-rules">
+      <div class="screen-header">
+        <h2>How to Play</h2>
+        <button class="btn-close" id="btn-close-rules" aria-label="Close rules">✕</button>
+      </div>
+      <div class="rules-content">
+        <div class="rules-section">
+          <h3>The Goal</h3>
+          <ul>
+            <li>The <strong>Guesser</strong> tries to figure out the secret Bollywood word from clues.</li>
+            <li>Some players (<strong>Nice</strong>) want the Guesser to succeed. One player (<strong>Naughty</strong>) wants to confuse them!</li>
+          </ul>
+        </div>
+        <div class="rules-section">
+          <h3>Each Round</h3>
+          <ol>
+            <li>One player is randomly picked as the <strong>Guesser</strong>.</li>
+            <li>Everyone else secretly sees their role — <strong>Nice</strong> or <strong>Naughty</strong>.</li>
+            <li>A secret Bollywood word is revealed to all non-Guessers (Guesser looks away).</li>
+            <li>Each non-Guesser enters <strong>one word</strong> as a clue — privately, one at a time.</li>
+            <li>Duplicate clues are automatically removed.</li>
+            <li>The Guesser sees the surviving clues and picks from 6 options.</li>
+            <li>If correct, the Guesser names who they think was Naughty.</li>
+          </ol>
+        </div>
+        <div class="rules-section">
+          <h3>Scoring</h3>
+          <table class="rules-score-table">
+            <tr><th>Event</th><th>Points</th></tr>
+            <tr><td>Guesser guesses correctly</td><td>+2</td></tr>
+            <tr><td>Guesser catches the Naughty player</td><td>+1 bonus</td></tr>
+            <tr><td>Nice player's clue survives (not cancelled)</td><td>+1</td></tr>
+            <tr><td>Naughty player is NOT caught</td><td>+2</td></tr>
+          </table>
+        </div>
+        <div class="rules-section">
+          <h3>Clue Rules</h3>
+          <ul>
+            <li>One word only — no spaces allowed.</li>
+            <li>You cannot say the secret word itself.</li>
+            <li>If two players give the same clue, both are cancelled!</li>
+          </ul>
+        </div>
+        <div class="rules-section">
+          <h3>End of Game</h3>
+          <ul>
+            <li>Everyone is Guesser exactly twice. Most points wins!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Player Setup
+         ====================================================== -->
+    <div data-screen="screen-players">
+      <h2 class="screen-title">Players</h2>
+      <p class="screen-subtitle">Add 4–12 players to get started</p>
+
+      <div id="player-list" class="player-list"></div>
+
+      <p class="player-count-hint" id="player-count-hint">Need at least 4 players</p>
+
+      <button class="btn btn-ghost btn-sm" id="btn-add-player" style="margin-bottom:16px">+ Add Player</button>
+
+      <div class="validation-msg" id="player-validation"></div>
+
+      <div class="mt-auto">
+        <button class="btn btn-primary" id="btn-start-game" disabled>Start Game</button>
+        <button class="btn btn-ghost" id="btn-back-home" style="margin-top:10px">Back</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Role Reveal
+         ====================================================== -->
+    <div data-screen="screen-role-reveal">
+      <!-- JS renders either guesser-announce or role flip card -->
+      <div id="role-reveal-content" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:center;gap:0;text-align:center;padding:0 4px"></div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Word Show
+         ====================================================== -->
+    <div data-screen="screen-word-show">
+      <div class="spacer"></div>
+      <p class="screen-eyebrow">Secret Word</p>
+      <div class="word-display">
+        <div class="category-badge" id="word-category-badge"></div>
+        <h1 class="the-word" id="word-text"></h1>
+        <p class="word-hint" id="word-hint-text"></p>
+      </div>
+      <p class="instruction-text">
+        Everyone except <strong id="guesser-name-word-show"></strong> — memorise this word!
+      </p>
+      <div class="spacer"></div>
+      <button class="btn btn-primary" id="btn-word-seen">Everyone's seen it — Start Clues</button>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Clue Entry
+         ====================================================== -->
+    <div data-screen="screen-clue-entry">
+      <!-- Privacy gate -->
+      <div id="clue-privacy-gate" class="privacy-gate">
+        <div class="eyes-icon">👀</div>
+        <p class="pass-label">Pass phone to</p>
+        <p class="privacy-player-name" id="clue-gate-player-name"></p>
+        <div class="ready-btn-wrap">
+          <button class="btn btn-primary" id="btn-ready-for-clue">I'm ready</button>
+        </div>
+      </div>
+
+      <!-- Clue input view (hidden initially) -->
+      <div id="clue-input-view" class="clue-input-view hidden">
+        <div id="clue-progress-dots" class="progress-dots" style="margin-bottom:16px"></div>
+        <p class="clue-player-header">Your clue, <strong id="clue-input-player-name"></strong></p>
+        <p class="clue-instruction">Give ONE word that hints at the secret word</p>
+        <p class="clue-instruction-sub">No spaces · Don't say the word itself</p>
+
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="clue-input"
+            class="clue-text-input"
+            placeholder="Your one-word clue…"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            inputmode="text"
+            maxlength="30"
+          >
+        </div>
+        <div class="clue-validation-msg" id="clue-validation-msg"></div>
+        <div class="mt-auto">
+          <button class="btn btn-primary" id="btn-submit-clue">Submit Clue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Guess
+         ====================================================== -->
+    <div data-screen="screen-guess">
+      <h2 class="screen-title">Your Clues</h2>
+      <p class="screen-subtitle">Guess the secret Bollywood word</p>
+
+      <div id="surviving-clues" class="clues-list"></div>
+
+      <h3 class="pick-label">Pick the word:</h3>
+      <div id="guess-grid" class="guess-grid"></div>
+
+      <div class="mt-auto">
+        <button class="btn btn-primary" id="btn-confirm-guess" disabled>Confirm Guess</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Catch Naughty
+         ====================================================== -->
+    <div data-screen="screen-catch">
+      <h2 class="screen-title">Correct!</h2>
+      <p class="screen-subtitle">Who gave a misleading clue? Tap the Naughty player:</p>
+
+      <div id="catch-player-grid" class="player-grid"></div>
+
+      <div class="mt-auto">
+        <button class="btn btn-ghost" id="btn-skip-catch">Nobody — I'm not sure</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Round Result
+         ====================================================== -->
+    <div data-screen="screen-round-result">
+      <h2 class="screen-title">Round <span id="result-round-num"></span> Results</h2>
+      <div id="round-result-reveal" class="mb-6"></div>
+      <div id="round-result-list" class="result-list"></div>
+      <div class="mt-auto">
+        <button class="btn btn-primary" id="btn-to-scoreboard">See Scoreboard</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Scoreboard
+         ====================================================== -->
+    <div data-screen="screen-scoreboard">
+      <h2 class="screen-title">Scoreboard</h2>
+      <p class="round-counter">After Round <span id="sb-round-num"></span> of <span id="sb-total-rounds"></span></p>
+      <div id="scoreboard-list" class="score-list"></div>
+      <div class="mt-auto">
+        <button class="btn btn-primary" id="btn-next-round">Next Round</button>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SCREEN: Final
+         ====================================================== -->
+    <div data-screen="screen-final">
+      <div class="winner-banner" id="winner-banner">
+        <div class="winner-trophy">🏆</div>
+        <p class="winner-label">Winner</p>
+        <h1 class="winner-name" id="winner-name"></h1>
+        <p class="winner-score" id="winner-score-text"></p>
+      </div>
+
+      <div class="final-table" id="final-score-table"></div>
+
+      <div class="mt-auto">
+        <button class="btn btn-primary" id="btn-play-again">Play Again</button>
+      </div>
+    </div>
+
+  </div><!-- #app -->
+
+  <script src="./app.js"></script>
+</body>
+</html>
