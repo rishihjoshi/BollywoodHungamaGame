@@ -204,25 +204,92 @@ button, input { font-family: inherit; -webkit-tap-highlight-color: transparent; 
 .hidden      { display: none !important; }
 
 /* ============================================================
-   HOME SCREEN
+   HOME SCREEN — Multi-Game Hub
    ============================================================ */
 [data-screen="screen-home"] {
-  align-items: center; justify-content: center; text-align: center; gap: 0;
+  align-items: stretch;
+  gap: 0;
 }
-.home-logo {
-  width: 88px; height: 88px;
-  border-radius: 18px; overflow: hidden; margin-bottom: 16px;
+
+/* Hub header row: logo | title | scores button */
+.hub-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0 20px;
+  flex-shrink: 0;
 }
-.home-logo img { width: 100%; height: 100%; }
-.game-title {
+.hub-logo {
+  width: 44px; height: 44px;
+  border-radius: 10px; overflow: hidden; flex-shrink: 0;
+}
+.hub-logo img { width: 100%; height: 100%; object-fit: cover; }
+.hub-title-wrap { flex: 1; min-width: 0; }
+.hub-eyebrow {
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--color-text-muted); line-height: 1; margin-bottom: 2px;
+}
+.hub-title {
   font-family: var(--font-display);
-  font-size: 3rem; font-weight: 900; color: var(--color-gold); line-height: 1.05; margin-bottom: 8px;
+  font-size: 1.4rem; font-weight: 900;
+  color: var(--color-gold); line-height: 1;
 }
-.game-tagline {
-  font-size: 0.875rem; color: var(--color-text-muted);
-  max-width: 260px; margin: 0 auto 36px; line-height: 1.6;
+.hub-scores-btn {
+  width: 44px; min-height: 44px; padding: 0; flex-shrink: 0;
+  border-radius: var(--radius); font-size: 1.25rem;
 }
-.home-actions { width: 100%; max-width: 320px; }
+
+/* Games list */
+.games-list {
+  display: flex; flex-direction: column; gap: 12px;
+  flex: 1;
+}
+
+/* Individual game card */
+.game-hub-card {
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.game-card-active {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-gold);
+  box-shadow: 0 0 24px rgba(255,215,0,0.07);
+}
+.game-card-soon {
+  background: var(--color-surface-2);
+  border: 1px dashed var(--color-border);
+  opacity: 0.5;
+}
+
+.game-card-top {
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.game-card-icon {
+  font-size: 1.75rem; flex-shrink: 0;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,215,0,0.1); border-radius: var(--radius);
+}
+.game-card-icon-dim {
+  background: var(--color-surface-3);
+}
+.game-card-info { flex: 1; min-width: 0; }
+.game-card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--color-gold); line-height: 1.2; margin-bottom: 4px;
+}
+.game-card-name-dim { color: var(--color-text-muted); }
+.game-card-desc {
+  font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5;
+}
+
+/* Action buttons inside a game card — side by side, no stacking margin */
+.game-card-actions {
+  display: flex; gap: 10px; align-items: stretch;
+}
+.game-card-actions .btn { flex: 1; margin-top: 0 !important; }
 
 /* ============================================================
    SETUP SCREEN

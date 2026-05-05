@@ -1,7 +1,7 @@
 {
-  "name": "Bollywood Hungama",
-  "short_name": "BH Game",
-  "description": "The Sholay-inspired Bollywood party word game",
+  "name": "Bollywood Games",
+  "short_name": "BW Games",
+  "description": "Sholay-inspired Bollywood party games hub — Kaun hai Gabbar and more",
   "start_url": "./index.html",
   "display": "standalone",
   "display_override": ["standalone"],

@@ -839,8 +839,16 @@ function bindEvents() {
 }
 
 // ============================================================
-// 21. INIT
+// 21. INIT + ANDROID PWA
 // ============================================================
+
+// Android A2HS: capture beforeinstallprompt so the browser
+// doesn't discard it before we can use it later.
+let _installPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _installPrompt = e;
+});
 
 async function initApp() {
   loadState();

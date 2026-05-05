@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Bollywood Hungama — the Sholay-inspired Bollywood party word game">
+  <meta name="description" content="Bollywood Games — Sholay-inspired Bollywood party games hub">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="BH Game">
@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
-  <title>Bollywood Hungama</title>
+  <title>Bollywood Games</title>
 </head>
 <body>
 
@@ -38,24 +38,54 @@
 <div id="app">
 
   <!-- ====================================================
-       SCREEN: Home
+       SCREEN: Home — Multi-Game Hub
        ==================================================== -->
   <div data-screen="screen-home" class="screen-active">
-    <div class="spacer"></div>
-    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;width:100%">
-      <div class="home-logo">
-        <img src="./icons/icon.svg" alt="Bollywood Hungama">
+
+    <!-- Hub header -->
+    <div class="hub-header">
+      <div class="hub-logo">
+        <img src="./icons/icon.svg" alt="Bollywood Games">
       </div>
-      <h1 class="game-title">Bollywood<br>Hungama</h1>
-      <p class="game-tagline">Jo Darr Gaya, Samjho Marr Gaya.<br>Find the Daku before it's too late.</p>
+      <div class="hub-title-wrap">
+        <p class="hub-eyebrow">Bollywood Games</p>
+        <h1 class="hub-title">Party Hub</h1>
+      </div>
+      <button class="btn btn-surface hub-scores-btn" id="btn-home-scores" aria-label="Scores">🏆</button>
     </div>
-    <div class="spacer"></div>
-    <div style="width:100%;max-width:320px;margin:0 auto">
-      <button class="btn btn-primary" id="btn-home-start">🎬 Start Game</button>
-      <button class="btn btn-ghost"   id="btn-home-rules" style="margin-top:10px">How to Play</button>
-      <button class="btn btn-surface" id="btn-home-scores" style="margin-top:10px">🏆 Scores</button>
-    </div>
-    <div style="height:24px"></div>
+
+    <!-- Games list -->
+    <div class="games-list">
+
+      <!-- Game 1: Kaun hai Gabbar? -->
+      <div class="game-hub-card game-card-active">
+        <div class="game-card-top">
+          <div class="game-card-icon">💀</div>
+          <div class="game-card-info">
+            <h2 class="game-card-name">Kaun hai Gabbar?</h2>
+            <p class="game-card-desc">Jo Darr Gaya, Samjho Marr Gaya. Find the Daku hiding among the Gaon — before it's too late.</p>
+          </div>
+        </div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary" id="btn-home-start">🎬 Play</button>
+          <button class="btn btn-ghost btn-sm" id="btn-home-rules">How to Play</button>
+        </div>
+      </div>
+
+      <!-- Placeholder: Coming Soon -->
+      <div class="game-hub-card game-card-soon">
+        <div class="game-card-top">
+          <div class="game-card-icon game-card-icon-dim">🎵</div>
+          <div class="game-card-info">
+            <h2 class="game-card-name game-card-name-dim">More Games</h2>
+            <p class="game-card-desc">More Bollywood party games coming soon!</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.games-list -->
+
+    <div style="height:16px"></div>
   </div>
 
   <!-- ====================================================
