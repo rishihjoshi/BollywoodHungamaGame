@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bollywood-hungama-v2';
+const CACHE_NAME = 'bollywood-hungama-v3';
 
 const STATIC_ASSETS = [
   './',

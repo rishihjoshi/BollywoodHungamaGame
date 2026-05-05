@@ -405,95 +405,8 @@ function showRoleCard(idx) {
 }
 
 // ============================================================
-// 14. WORD REVEAL SCREEN
-// ============================================================
-
-function renderWordRevealForPlayer(idx) {
-  const player = STATE.players[idx];
-
-  const gate   = document.getElementById('wr-privacy-gate');
-  const reveal = document.getElementById('wr-reveal-view');
-  gate.classList.remove('hidden');
-  reveal.classList.add('hidden');
-
-  document.getElementById('wr-gate-name').textContent = player.name;
-
-  const revealBtn = document.getElementById('btn-wr-reveal');
-  revealBtn.replaceWith(revealBtn.cloneNode(true));
-  document.getElementById('btn-wr-reveal').addEventListener('click', () => {
-    showWordReveal(idx);
-  }, { once: true });
-}
-
-function showWordReveal(idx) {
-  const player  = STATE.players[idx];
-  const word    = STATE.currentWord;
-  const isDaku  = player.role === 'daku';
-  const catLabel= CATEGORY_LABELS[word.category] || word.category;
-
-  const gate   = document.getElementById('wr-privacy-gate');
-  const reveal = document.getElementById('wr-reveal-view');
-  gate.classList.add('hidden');
-  reveal.classList.remove('hidden');
-
-  const content = document.getElementById('wr-content');
-
-  if (!isDaku) {
-    // GAON: full word + hint + image
-    let imgHtml = '';
-    if (word.imageUrl) {
-      imgHtml = `<img src="${escHtml(word.imageUrl)}" alt="${escHtml(word.word)}" class="wr-image"
-                      onerror="this.style.display='none'">`;
-    }
-    content.innerHTML = `
-      <div class="word-reveal-gaon">
-        <div class="wr-cat-badge">${escHtml(catLabel)}</div>
-        ${imgHtml}
-        <div class="wr-word">${escHtml(word.word)}</div>
-        <div class="wr-hint">${escHtml(word.hint)}</div>
-      </div>
-    `;
-  } else if (STATE.showCatToDaku) {
-    // DAKU (toggle ON): show category only
-    content.innerHTML = `
-      <div class="word-reveal-daku">
-        <div style="font-size:40px">💀</div>
-        <div class="wr-daku-label">You are DAKU — Category only</div>
-        <div class="wr-daku-cat">${escHtml(catLabel)}</div>
-        <div class="wr-daku-note">Blend in. Give a plausible clue without knowing the word.</div>
-      </div>
-    `;
-  } else {
-    // DAKU (toggle OFF): see nothing
-    content.innerHTML = `
-      <div class="word-reveal-daku-blind">
-        <div style="font-size:40px">🙈</div>
-        <div style="font-family:var(--font-display);font-size:1.25rem;color:var(--color-gold);margin:8px 0">You are DAKU</div>
-        <div style="font-size:0.875rem;color:var(--color-text-muted);line-height:1.6">
-          You don't see the word.<br>Listen carefully and bluff!
-        </div>
-      </div>
-    `;
-  }
-
-  // Wire Done button
-  const doneBtn = document.getElementById('btn-wr-done');
-  doneBtn.replaceWith(doneBtn.cloneNode(true));
-  document.getElementById('btn-wr-done').addEventListener('click', () => {
-    const next = idx + 1;
-    STATE.wordRevealIndex = next;
-    saveState();
-    if (next >= STATE.players.length) {
-      // All words revealed — offline play
-      goTo('screen-offline-play');
-    } else {
-      renderWordRevealForPlayer(next);
-    }
-  }, { once: true });
-}
-
-// ============================================================
-// 15. END SCREEN
+// 14. END SCREEN
+// (Word reveal is now combined into the role reveal screen — section 13)
 // ============================================================
 
 function renderEndScreen() {
@@ -530,9 +443,13 @@ function renderEndScreen() {
   });
 
   // Record section: YES/NO per Daku
+  // Replace catchList with a shallow clone to clear all accumulated event listeners
+  // (renderEndScreen is called on every round; without this, listeners stack up
+  //  and finalizeRound() fires multiple times per click on the second+ round)
   STATE.roundResult = {};
-  const catchList = document.getElementById('catch-record-list');
-  catchList.innerHTML = '';
+  const oldCatchList = document.getElementById('catch-record-list');
+  const catchList = oldCatchList.cloneNode(false); // shallow — no children
+  oldCatchList.replaceWith(catchList);
   dakuPlayers.forEach(p => {
     STATE.roundResult[p.char.name] = null;
     const row = document.createElement('div');
