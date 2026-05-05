@@ -324,11 +324,12 @@ function showRoleCard(idx) {
   document.getElementById('rr-card-name').textContent = player.name;
 
   // Set role card style (DAKU = dark red, GAON = navy/gold)
-  // Re-trigger the scale-bounce animation by cloning the element in place
+  // Re-trigger the CSS animation without touching children (cloneNode(false) orphans them)
   const roleCard = document.getElementById('rr-role-card');
-  const freshCard = roleCard.cloneNode(false); // shallow clone removes old animation state
-  freshCard.className = `role-card ${isDaku ? 'card-daku' : 'card-gaon'}`;
-  roleCard.replaceWith(freshCard);
+  roleCard.className = `role-card ${isDaku ? 'card-daku' : 'card-gaon'}`;
+  roleCard.style.animation = 'none';
+  roleCard.offsetHeight; // force reflow so the animation restarts cleanly
+  roleCard.style.animation = '';
 
   document.getElementById('rr-team-badge').textContent  = char.team;
   document.getElementById('rr-char-name').innerHTML     = `${char.emoji} ${escHtml(char.name)}`;
