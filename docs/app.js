@@ -747,9 +747,16 @@ function bindEvents() {
     goTo('screen-scores');
   });
 
-  // ── Abandon modal ──
+  // ── Abandon modal: mid-game screens only (role-reveal, word-reveal, offline-play) ──
   document.querySelectorAll('.screen-cancel').forEach(btn => {
     btn.addEventListener('click', () => showAbandonModal(abandonToHome));
+  });
+
+  // ── Setup cancel: no game yet — go straight home, no modal needed ──
+  document.getElementById('cancel-setup').addEventListener('click', () => {
+    STATE.players = [];
+    saveState();
+    goTo('screen-home');
   });
 
   // ── Rules back ──
