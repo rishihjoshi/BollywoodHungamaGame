@@ -313,6 +313,8 @@ function showRoleCard(idx) {
   const player = STATE.players[idx];
   const char   = player.char;
   const isDaku  = player.role === 'daku';
+  const word    = STATE.currentWord;
+  const catLabel= CATEGORY_LABELS[word.category] || word.category;
 
   const gate     = document.getElementById('rr-privacy-gate');
   const cardView = document.getElementById('rr-card-view');
@@ -333,20 +335,69 @@ function showRoleCard(idx) {
   card.classList.remove('flipped');
   requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('flipped')));
 
-  // Wire Done button
-  const doneBtn = document.getElementById('btn-rr-done');
-  doneBtn.replaceWith(doneBtn.cloneNode(true));
+  // Populate word content for below the card
+  const wordSection = document.getElementById('rr-word-section');
+  const wordContent = document.getElementById('rr-word-content');
+  wordSection.classList.add('hidden');
+
+  if (!isDaku) {
+    // GAON: full word + hint + image
+    let imgHtml = '';
+    if (word.imageUrl) {
+      imgHtml = `<img src="${escHtml(word.imageUrl)}" alt="${escHtml(word.word)}" class="wr-image"
+                      onerror="this.style.display='none'">`;
+    }
+    wordContent.innerHTML = `
+      <div class="word-reveal-gaon">
+        <div class="wr-cat-badge">${escHtml(catLabel)}</div>
+        ${imgHtml}
+        <div class="wr-word">${escHtml(word.word)}</div>
+        <div class="wr-hint">${escHtml(word.hint)}</div>
+      </div>
+    `;
+  } else if (STATE.showCatToDaku) {
+    wordContent.innerHTML = `
+      <div class="word-reveal-daku">
+        <div style="font-size:40px">💀</div>
+        <div class="wr-daku-label">You are DAKU — Category only</div>
+        <div class="wr-daku-cat">${escHtml(catLabel)}</div>
+        <div class="wr-daku-note">Blend in. Give a plausible clue without knowing the word.</div>
+      </div>
+    `;
+  } else {
+    wordContent.innerHTML = `
+      <div class="word-reveal-daku-blind">
+        <div style="font-size:40px">🙈</div>
+        <div style="font-family:var(--font-display);font-size:1.25rem;color:var(--color-gold);margin:8px 0">You are DAKU</div>
+        <div style="font-size:0.875rem;color:var(--color-text-muted);line-height:1.6">
+          You don't see the word.<br>Listen carefully and bluff!
+        </div>
+      </div>
+    `;
+  }
+
+  // Wire Done button — replace first to clear stale listeners
+  const oldDone = document.getElementById('btn-rr-done');
+  oldDone.replaceWith(oldDone.cloneNode(true));
   const freshDone = document.getElementById('btn-rr-done');
+  freshDone.classList.add('hidden');
+
+  // After flip animation settles (850ms = 85s animation + 200ms buffer),
+  // reveal the word info and the Done button so the user has time to read the card
+  setTimeout(() => {
+    wordSection.classList.remove('hidden');
+    freshDone.classList.remove('hidden');
+    cardView.scrollTop = 0; // keep card visible at top
+  }, 1050);
+
   freshDone.addEventListener('click', () => {
     const next = idx + 1;
     STATE.roleRevealIndex = next;
+    STATE.wordRevealIndex = next; // kept in sync (legacy field)
     saveState();
     if (next >= STATE.players.length) {
-      // All roles revealed — move to word reveal
-      STATE.wordRevealIndex = 0;
-      saveState();
-      renderWordRevealForPlayer(0);
-      goTo('screen-word-reveal');
+      // All players done — go straight to offline play (no second pass needed)
+      goTo('screen-offline-play');
     } else {
       renderRoleRevealForPlayer(next);
     }
@@ -743,8 +794,8 @@ function resumePhase() {
       goTo('screen-role-reveal');
       break;
     case 'screen-word-reveal':
-      renderWordRevealForPlayer(STATE.wordRevealIndex);
-      goTo('screen-word-reveal');
+      // Word reveal is now combined into role reveal — resume at offline play
+      goTo('screen-offline-play');
       break;
     case 'screen-offline-play':
       goTo('screen-offline-play');

@@ -173,7 +173,7 @@
       <p class="privacy-pass-label">Pass phone to</p>
       <p class="privacy-name" id="rr-gate-name"></p>
       <div class="privacy-btn-wrap">
-        <button class="btn btn-primary" id="btn-rr-reveal">🎭 Reveal My Role</button>
+        <button class="btn btn-primary" id="btn-rr-reveal">🎭 Reveal Role &amp; Word</button>
       </div>
     </div>
 
@@ -196,10 +196,15 @@
         </div>
       </div>
 
-      <p class="role-memorise" id="rr-memorise-hint">Memorise your role, then pass the phone</p>
+      <p class="role-memorise" id="rr-memorise-hint">Memorise your role and word, then pass the phone</p>
+
+      <!-- Word info revealed below the card after the flip settles -->
+      <div id="rr-word-section" class="rr-word-section hidden">
+        <div id="rr-word-content"></div>
+      </div>
 
       <div style="width:100%;max-width:320px;margin-top:8px">
-        <button class="btn btn-primary" id="btn-rr-done">Done — Pass Phone</button>
+        <button class="btn btn-primary hidden" id="btn-rr-done">Done — Pass Phone</button>
       </div>
     </div>
   </div>

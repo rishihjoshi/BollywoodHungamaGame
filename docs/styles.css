@@ -360,7 +360,7 @@ button, input { font-family: inherit; -webkit-tap-highlight-color: transparent; 
 }
 .flip-card-inner {
   position: relative; width: 100%; height: 100%;
-  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
 }
 .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
@@ -405,6 +405,14 @@ button, input { font-family: inherit; -webkit-tap-highlight-color: transparent; 
 .role-flavour { font-size: 0.8rem; text-align: center; line-height: 1.5; color: rgba(245,245,245,0.7); font-style: italic; }
 
 .role-memorise { font-size: 0.8rem; color: var(--color-text-muted); text-align: center; transition: opacity 0.4s; }
+
+/* Combined role+word section — appears below the flip card after animation */
+.rr-word-section {
+  width: 100%; max-width: 320px;
+  animation: fadeIn 0.5s ease;
+}
+.rr-word-section.hidden { display: none; }
+#btn-rr-done.hidden { display: none; }
 
 /* ── Word Reveal screens ── */
 .word-reveal-screen {
