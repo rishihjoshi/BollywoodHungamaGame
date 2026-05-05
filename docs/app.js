@@ -376,19 +376,14 @@ function showRoleCard(idx) {
     `;
   }
 
-  // Wire Done button — replace first to clear stale listeners
+  // Show word section immediately — revealed at the same time as the card flip
+  wordSection.classList.remove('hidden');
+
+  // Wire Done button — replace first to clear stale listeners, then show immediately
   const oldDone = document.getElementById('btn-rr-done');
   oldDone.replaceWith(oldDone.cloneNode(true));
   const freshDone = document.getElementById('btn-rr-done');
-  freshDone.classList.add('hidden');
-
-  // After flip animation settles (850ms = 85s animation + 200ms buffer),
-  // reveal the word info and the Done button so the user has time to read the card
-  setTimeout(() => {
-    wordSection.classList.remove('hidden');
-    freshDone.classList.remove('hidden');
-    cardView.scrollTop = 0; // keep card visible at top
-  }, 1050);
+  freshDone.classList.remove('hidden');
 
   freshDone.addEventListener('click', () => {
     const next = idx + 1;
