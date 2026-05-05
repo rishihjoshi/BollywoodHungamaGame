@@ -1,156 +1,1052 @@
 [
-  { "id": "w001", "category": "film_title", "word": "Tezaab",        "hint": "1988 Madhuri Dixit acid-revenge thriller" },
-  { "id": "w002", "category": "film_title", "word": "Chandni",       "hint": "1989 Yash Chopra romance with Sridevi" },
-  { "id": "w003", "category": "film_title", "word": "Baazigar",      "hint": "1993 SRK's debut negative-role blockbuster" },
-  { "id": "w004", "category": "film_title", "word": "Darr",          "hint": "1993 SRK's obsessive stalker thriller" },
-  { "id": "w005", "category": "film_title", "word": "Rangeela",      "hint": "1995 Aamir-Urmila Ram Gopal Varma musical" },
-  { "id": "w006", "category": "film_title", "word": "Dil",           "hint": "1990 Aamir Khan-Madhuri campus romance" },
-  { "id": "w007", "category": "film_title", "word": "Saajan",        "hint": "1991 Salman-Madhuri-Sanjay love triangle" },
-  { "id": "w008", "category": "film_title", "word": "Hum",           "hint": "1991 Amitabh Bachchan action blockbuster" },
-  { "id": "w009", "category": "film_title", "word": "Devdas",        "hint": "2002 Bhansali's doomed lover saga" },
-  { "id": "w010", "category": "film_title", "word": "Black",         "hint": "2005 Amitabh-Rani disability drama by Bhansali" },
-  { "id": "w011", "category": "film_title", "word": "Ghajini",       "hint": "2008 Aamir Khan anterograde amnesia thriller" },
-  { "id": "w012", "category": "film_title", "word": "Dabangg",       "hint": "2010 Salman Khan's iconic small-town cop film" },
-  { "id": "w013", "category": "film_title", "word": "Barfi",         "hint": "2012 Ranbir Kapoor silent comedy-drama" },
-  { "id": "w014", "category": "film_title", "word": "Dangal",        "hint": "2016 Aamir as wrestling coach Mahavir Phogat" },
-  { "id": "w015", "category": "film_title", "word": "Raazi",         "hint": "2018 Alia Bhatt as spy bride in Pakistan" },
-  { "id": "w016", "category": "film_title", "word": "Uri",           "hint": "2019 surgical strike film with Vicky Kaushal" },
-  { "id": "w017", "category": "film_title", "word": "Stree",         "hint": "2018 horror-comedy about a ghost who takes men" },
-  { "id": "w018", "category": "film_title", "word": "Pathaan",       "hint": "2023 SRK's comeback spy blockbuster" },
-  { "id": "w019", "category": "film_title", "word": "Zindagi",       "hint": "2011 ZNMD — three friends road trip in Spain" },
-  { "id": "w020", "category": "film_title", "word": "Taare",         "hint": "2007 Aamir Khan's dyslexia film (first word)" },
-  { "id": "w021", "category": "film_title", "word": "Rang",          "hint": "2006 Aamir Khan student revolution drama" },
-  { "id": "w022", "category": "film_title", "word": "Omkara",        "hint": "2006 Vishal Bhardwaj Othello adaptation" },
-  { "id": "w023", "category": "film_title", "word": "Veer",          "hint": "2004 SRK-Preity cross-border romance" },
-  { "id": "w024", "category": "film_title", "word": "Mohabbatein",   "hint": "2000 Amitabh vs SRK in a school of love" },
-  { "id": "w025", "category": "film_title", "word": "Bajrangi",      "hint": "2015 Salman reunites Pakistani child with family" },
-  { "id": "w026", "category": "film_title", "word": "Shershaah",     "hint": "2021 Sidharth Malhotra as Captain Vikram Batra" },
-  { "id": "w027", "category": "film_title", "word": "Animal",        "hint": "2023 Ranbir Kapoor's dark father-son revenge saga" },
-  { "id": "w028", "category": "film_title", "word": "Gully",         "hint": "2019 Ranveer Singh as Mumbai street rapper" },
-  { "id": "w029", "category": "film_title", "word": "Tanhaji",       "hint": "2020 Ajay Devgn as Maratha warrior Tanhaji Malusare" },
-  { "id": "w030", "category": "film_title", "word": "Sultan",        "hint": "2016 Salman Khan as comeback wrestling champion" },
-
-  { "id": "w031", "category": "hero_dialogue", "word": "Mogambo",      "hint": "Mr. India 1987 — villain's catchphrase of delight" },
-  { "id": "w032", "category": "hero_dialogue", "word": "Palat",        "hint": "DDLJ 1995 — Raj tests Simran's love at station" },
-  { "id": "w033", "category": "hero_dialogue", "word": "Picture",      "hint": "Dabangg 2010 — Chulbul Pandey's ending taunt" },
-  { "id": "w034", "category": "hero_dialogue", "word": "Kiran",        "hint": "Darr 1993 — Rahul's stuttering obsession" },
-  { "id": "w035", "category": "hero_dialogue", "word": "Baap",         "hint": "Shahenshah 1988 — Amitabh's father identity reveal" },
-  { "id": "w036", "category": "hero_dialogue", "word": "Commitment",   "hint": "Salman Khan's iconic self-promise dialogue" },
-  { "id": "w037", "category": "hero_dialogue", "word": "Namumkin",     "hint": "Don 2006 — catching Don is impossible" },
-  { "id": "w038", "category": "hero_dialogue", "word": "Jhappi",       "hint": "Munna Bhai 2003 — the magical healing hug" },
-  { "id": "w039", "category": "hero_dialogue", "word": "Tiger",        "hint": "Tiger Zinda Hai 2017 — hero declares himself alive" },
-  { "id": "w040", "category": "hero_dialogue", "word": "Apna",         "hint": "Gully Boy 2019 — rapper's rise anthem dialogue" },
-  { "id": "w041", "category": "hero_dialogue", "word": "Vijay",        "hint": "Agneepath 1990 — Amitabh's full name declaration" },
-  { "id": "w042", "category": "hero_dialogue", "word": "Rishte",       "hint": "Shahenshah 1988 — opens the famous baap line" },
-  { "id": "w043", "category": "hero_dialogue", "word": "Desh",         "hint": "Swades 2004 — SRK's emotional return to motherland" },
-  { "id": "w044", "category": "hero_dialogue", "word": "Circuit",      "hint": "Munna Bhai 2003 — sidekick's iconic nickname in dialogue" },
-  { "id": "w045", "category": "hero_dialogue", "word": "Jaadu",        "hint": "Koi Mil Gaya 2003 — alien's name, means magic" },
-  { "id": "w046", "category": "hero_dialogue", "word": "Senorita",     "hint": "ZNMD 2011 — Hrithik's flirty one-liner in Spain" },
-  { "id": "w047", "category": "hero_dialogue", "word": "Rowdy",        "hint": "Rowdy Rathore 2012 — Akshay's double-role self-label" },
-  { "id": "w048", "category": "hero_dialogue", "word": "Tapori",       "hint": "Rangeela 1995 — Aamir's street-smart character tag" },
-  { "id": "w049", "category": "hero_dialogue", "word": "Khalnayak",    "hint": "Khalnayak 1993 — Sanjay Dutt's villain self-declaration" },
-  { "id": "w050", "category": "hero_dialogue", "word": "Bhai",         "hint": "Wanted 2009 — Salman's authority street address" },
-  { "id": "w051", "category": "hero_dialogue", "word": "Naam",         "hint": "Agneepath 1990 — Vijay states his full name proudly" },
-  { "id": "w052", "category": "hero_dialogue", "word": "Pagal",        "hint": "DTPH 1997 — SRK's romantic admission to Madhuri" },
-  { "id": "w053", "category": "hero_dialogue", "word": "Don",          "hint": "Don 2006 — SRK's identity claim in the police station" },
-  { "id": "w054", "category": "hero_dialogue", "word": "Dil",          "hint": "Dil Se 1998 — SRK's intense love monologue" },
-  { "id": "w055", "category": "hero_dialogue", "word": "Bhidu",        "hint": "Vaastav 1999 — Sanjay Dutt's Mumbai street slang" },
-  { "id": "w056", "category": "hero_dialogue", "word": "Takkar",       "hint": "Tezaab 1988 — Anil Kapoor's street brawl challenge" },
-  { "id": "w057", "category": "hero_dialogue", "word": "Jawan",        "hint": "Jawan 2023 — SRK's female-squad mission war cry" },
-  { "id": "w058", "category": "hero_dialogue", "word": "Babu",         "hint": "Hera Pheri 2000 — Akshay Kumar's confused catchphrase" },
-  { "id": "w059", "category": "hero_dialogue", "word": "Shahenshah",   "hint": "Shahenshah 1988 — Amitabh's vigilante alter-ego name" },
-  { "id": "w060", "category": "hero_dialogue", "word": "Aye",          "hint": "Hera Pheri 2000 — Babu Bhaiya's signature confused yelp" },
-
-  { "id": "w061", "category": "celeb", "word": "Bachchan",   "hint": "The original angry young man of Bollywood" },
-  { "id": "w062", "category": "celeb", "word": "Bhai",       "hint": "Salman Khan's beloved nickname across India" },
-  { "id": "w063", "category": "celeb", "word": "SRK",        "hint": "King Khan — initials of the biggest romantic star" },
-  { "id": "w064", "category": "celeb", "word": "Chopra",     "hint": "She went global — Quantico, Miss World, Citadel" },
-  { "id": "w065", "category": "celeb", "word": "Kapoor",     "hint": "Kareena, Ranbir, Sonam — a dynasty of stars" },
-  { "id": "w066", "category": "celeb", "word": "Alia",       "hint": "Gangubai actress who married Ranbir Kapoor" },
-  { "id": "w067", "category": "celeb", "word": "Ranveer",    "hint": "Rocky Aur Rani — Bollywood's most flamboyant dresser" },
-  { "id": "w068", "category": "celeb", "word": "Hrithik",    "hint": "Greek god looks, starred in Krrish and War" },
-  { "id": "w069", "category": "celeb", "word": "Katrina",    "hint": "British-Indian actress, starred with Salman and SRK" },
-  { "id": "w070", "category": "celeb", "word": "Kajol",      "hint": "DDLJ heroine — Ajay Devgn's real-life wife" },
-  { "id": "w071", "category": "celeb", "word": "Madhuri",    "hint": "90s queen — Ek Do Teen and Dola Re Dola" },
-  { "id": "w072", "category": "celeb", "word": "Aishwarya",  "hint": "Miss World 1994 — Devdas, Jodhaa Akbar actress" },
-  { "id": "w073", "category": "celeb", "word": "Akshay",     "hint": "Khiladi Kumar — Padman and Mission Mangal hero" },
-  { "id": "w074", "category": "celeb", "word": "Ajay",       "hint": "Singham actor — known for stoic action roles" },
-  { "id": "w075", "category": "celeb", "word": "Shahid",     "hint": "Kabir Singh and Haider — chocolate boy gone intense" },
-  { "id": "w076", "category": "celeb", "word": "Ranbir",     "hint": "Saawariya to Animal — Kapoor clan's reigning king" },
-  { "id": "w077", "category": "celeb", "word": "Deepika",    "hint": "Padmaavat actress — Ranveer Singh's wife" },
-  { "id": "w078", "category": "celeb", "word": "Taapsee",    "hint": "Pink and Thappad — the firebrand actress" },
-  { "id": "w079", "category": "celeb", "word": "Vidya",      "hint": "Kahaani and Dirty Picture — Balan the powerhouse" },
-  { "id": "w080", "category": "celeb", "word": "Kangana",    "hint": "Queen actress — from Manali to Manikarnika" },
-  { "id": "w081", "category": "celeb", "word": "Tiger",      "hint": "War and Baaghi — Jackie Shroff's acrobatic son" },
-  { "id": "w082", "category": "celeb", "word": "Varun",      "hint": "Student of the Year to Bhediya — Dhawan" },
-  { "id": "w083", "category": "celeb", "word": "Kartik",     "hint": "Bhool Bhulaiyaa 2 and Satyaprem Ki Katha hero" },
-  { "id": "w084", "category": "celeb", "word": "Sanjay",     "hint": "Munna Bhai and Vaastav — Dutt the legend" },
-  { "id": "w085", "category": "celeb", "word": "Govinda",    "hint": "90s comedy king — Coolie No. 1 and Hero No. 1" },
-  { "id": "w086", "category": "celeb", "word": "Nawaz",      "hint": "Gangs of Wasseypur — Siddiqui the character actor" },
-  { "id": "w087", "category": "celeb", "word": "Pankaj",     "hint": "Stree and Mimi — Tripathi the everyman genius" },
-  { "id": "w088", "category": "celeb", "word": "Irrfan",     "hint": "Life of Pi and Piku — Khan the world-class talent" },
-  { "id": "w089", "category": "celeb", "word": "Sushmita",   "hint": "Miss Universe 1994 — Main Hoon Na actress" },
-  { "id": "w090", "category": "celeb", "word": "Anushka",    "hint": "NH10 and Band Baaja Baaraat — Sharma the producer" },
-
-  { "id": "w091", "category": "song", "word": "Chaiyya",     "hint": "Dil Se 1998 — AR Rahman train-top SRK dance" },
-  { "id": "w092", "category": "song", "word": "Kajra",       "hint": "Bunty Aur Babli 2005 — Aishwarya's sultry eye song" },
-  { "id": "w093", "category": "song", "word": "Masakali",    "hint": "Delhi-6 2009 — AR Rahman's beloved pigeon song" },
-  { "id": "w094", "category": "song", "word": "Munni",       "hint": "Dabangg 2010 — Malaika Arora's item number" },
-  { "id": "w095", "category": "song", "word": "Sheila",      "hint": "Tees Maar Khan 2010 — Katrina's seductive number" },
-  { "id": "w096", "category": "song", "word": "Lungi",       "hint": "Chennai Express 2013 — Honey Singh tribute to Rajinikanth" },
-  { "id": "w097", "category": "song", "word": "Badtameez",   "hint": "YJHD 2013 — Ranbir-Deepika's playful dance anthem" },
-  { "id": "w098", "category": "song", "word": "Nagada",      "hint": "Ram-Leela 2013 — Deepika's dhol festival dance" },
-  { "id": "w099", "category": "song", "word": "Gerua",       "hint": "Dilwale 2015 — SRK-Kajol Iceland romantic ballad" },
-  { "id": "w100", "category": "song", "word": "Bulleya",     "hint": "Ae Dil Hai Mushkil 2016 — Sufi heartbreak masterpiece" },
-  { "id": "w101", "category": "song", "word": "Zaalima",     "hint": "Raees 2017 — SRK-Mahira Khan soulful romantic duet" },
-  { "id": "w102", "category": "song", "word": "Kesariya",    "hint": "Brahmastra 2022 — Ranbir-Alia saffron love anthem" },
-  { "id": "w103", "category": "song", "word": "Besharam",    "hint": "Pathaan 2023 — Deepika's yellow bikini item number" },
-  { "id": "w104", "category": "song", "word": "Balam",       "hint": "YJHD 2013 — Holi colours party pichkari anthem" },
-  { "id": "w105", "category": "song", "word": "Chammak",     "hint": "Ra.One 2011 — Akon and SRK's electronic club song" },
-  { "id": "w106", "category": "song", "word": "Naatu",       "hint": "RRR 2022 — Oscar-winning Telugu-Hindi dance extravaganza" },
-  { "id": "w107", "category": "song", "word": "Jhoome",      "hint": "Pathaan 2023 — SRK's triumphant return dance number" },
-  { "id": "w108", "category": "song", "word": "Naina",       "hint": "Dangal 2016 — emotional ballad from Aamir Khan film" },
-  { "id": "w109", "category": "song", "word": "Channa",      "hint": "ADHM 2016 — Ranbir's heartbreak Sufi classic" },
-  { "id": "w110", "category": "song", "word": "Ek Do Teen",  "hint": "Tezaab 1988 — Madhuri Dixit's iconic dance debut" },
-  { "id": "w111", "category": "song", "word": "Tip Tip",     "hint": "Mohra 1994 — Raveena Tandon's legendary rain dance" },
-  { "id": "w112", "category": "song", "word": "Dola",        "hint": "Devdas 2002 — Madhuri-Aishwarya mujra face-off" },
-  { "id": "w113", "category": "song", "word": "Tujhe",       "hint": "DDLJ 1995 — Lata Mangeshkar's timeless ballad" },
-  { "id": "w114", "category": "song", "word": "Didi",        "hint": "Hum Aapke Hain Koun 1994 — the devar-bhabhi comedy song" },
-  { "id": "w115", "category": "song", "word": "Gulabi",      "hint": "Shuddh Desi Romance 2013 — peppy pink love song" },
-  { "id": "w116", "category": "song", "word": "Swag",        "hint": "Tiger Zinda Hai 2017 — Salman-Katrina swagger anthem" },
-  { "id": "w117", "category": "song", "word": "Afghan",      "hint": "Phantom 2015 — Katrina Kaif's jalebi-inspired dance" },
-  { "id": "w118", "category": "song", "word": "Aankh",       "hint": "Simmba 2018 — Neha Kakkar's retro recreation" },
-  { "id": "w119", "category": "song", "word": "Gallan",      "hint": "Dil Dhadakne Do 2015 — rooftop Punjabi party song" },
-  { "id": "w120", "category": "song", "word": "Kar Gayi",    "hint": "Kapoor & Sons 2016 — Ali Zafar's chull party hit" },
-
-  { "id": "w121", "category": "character", "word": "Simran",       "hint": "DDLJ 1995 — Kajol waiting for Raj at the station" },
-  { "id": "w122", "category": "character", "word": "Raj",          "hint": "DDLJ 1995 — SRK's charming NRI romantic hero" },
-  { "id": "w123", "category": "character", "word": "Poo",          "hint": "K3G 2001 — Kareena's iconic self-obsessed fashionista" },
-  { "id": "w124", "category": "character", "word": "Rahul",        "hint": "KKHH 1998 — SRK's widowed college heartthrob" },
-  { "id": "w125", "category": "character", "word": "Anjali",       "hint": "KKHH 1998 — Kajol's tomboy who secretly loved Rahul" },
-  { "id": "w126", "category": "character", "word": "Munnabhai",    "hint": "Munna Bhai 2003 — lovable Bandra goon turned doctor" },
-  { "id": "w127", "category": "character", "word": "Circuit",      "hint": "Munna Bhai 2003 — Arshad Warsi's loyal sidekick" },
-  { "id": "w128", "category": "character", "word": "Geet",         "hint": "Jab We Met 2007 — Kareena's unstoppable Punjabi chatterbox" },
-  { "id": "w129", "category": "character", "word": "Devdas",       "hint": "Devdas 2002 — SRK's self-destructive alcohol-drenched lover" },
-  { "id": "w130", "category": "character", "word": "Paro",         "hint": "Devdas 2002 — Aishwarya's childhood sweetheart" },
-  { "id": "w131", "category": "character", "word": "Chandramukhi", "hint": "Devdas 2002 — Madhuri's golden-hearted courtesan" },
-  { "id": "w132", "category": "character", "word": "Bunny",        "hint": "YJHD 2013 — Ranbir Kapoor's free-spirited wanderer" },
-  { "id": "w133", "category": "character", "word": "Naina",        "hint": "YJHD 2013 — Deepika Padukone's doctor on road trip" },
-  { "id": "w134", "category": "character", "word": "Murad",        "hint": "Gully Boy 2019 — Ranveer Singh's rapper from Dharavi" },
-  { "id": "w135", "category": "character", "word": "Sehmat",       "hint": "Raazi 2018 — Alia Bhatt's Pakistani spy bride" },
-  { "id": "w136", "category": "character", "word": "Babita",       "hint": "Dangal 2016 — the younger wrestling Phogat sister" },
-  { "id": "w137", "category": "character", "word": "Geeta",        "hint": "Dangal 2016 — the elder wrestling champion sister" },
-  { "id": "w138", "category": "character", "word": "Sultan",       "hint": "Sultan 2016 — Salman's fallen-and-rising wrestling hero" },
-  { "id": "w139", "category": "character", "word": "Don",          "hint": "Don 2006 — SRK's dual-identity international crime lord" },
-  { "id": "w140", "category": "character", "word": "Piku",         "hint": "Piku 2015 — Deepika's uptight Delhi architect daughter" },
-  { "id": "w141", "category": "character", "word": "Rani",         "hint": "Queen 2014 — Kangana's solo honeymoon self-discovery hero" },
-  { "id": "w142", "category": "character", "word": "Chulbul",      "hint": "Dabangg 2010 — Salman's corrupt-yet-good small-town cop" },
-  { "id": "w143", "category": "character", "word": "Aman",         "hint": "Kal Ho Naa Ho 2003 — SRK's terminal illness secret" },
-  { "id": "w144", "category": "character", "word": "Vijay",        "hint": "Agneepath 1990 — Amitabh's revenge-driven protagonist" },
-  { "id": "w145", "category": "character", "word": "Aditya",       "hint": "Jab We Met 2007 — Shahid's heartbroken businessman" },
-  { "id": "w146", "category": "character", "word": "Vicky",        "hint": "Uri 2019 — Vicky Kaushal's Para SF commando hero" },
-  { "id": "w147", "category": "character", "word": "Haider",       "hint": "Haider 2014 — Shahid's Kashmir Hamlet figure" },
-  { "id": "w148", "category": "character", "word": "Sardar",       "hint": "Gangs of Wasseypur 2012 — Manoj Bajpayee's coal mafia don" },
-  { "id": "w149", "category": "character", "word": "Tara",         "hint": "Dil Dhadakne Do 2015 — Anushka Sharma's free spirit" },
-  { "id": "w150", "category": "character", "word": "Kabir",        "hint": "Kabir Singh 2019 — Shahid's self-destructive surgeon" }
+  {
+    "id": "w001",
+    "category": "film_title",
+    "word": "Tezaab",
+    "hint": "1988 Madhuri Dixit acid-revenge thriller",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/vwXVAAxuyDNfUSxYPS6YqRm80Cm.jpg"
+  },
+  {
+    "id": "w002",
+    "category": "film_title",
+    "word": "Chandni",
+    "hint": "1989 Yash Chopra romance with Sridevi",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/4CDmZFSPddbsXUt2lhjxQbxjNcQ.jpg"
+  },
+  {
+    "id": "w003",
+    "category": "film_title",
+    "word": "Baazigar",
+    "hint": "1993 SRK's debut negative-role blockbuster",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/ndQQ2bTV0JLSRxUBchE4eD3qhDb.jpg"
+  },
+  {
+    "id": "w004",
+    "category": "film_title",
+    "word": "Darr",
+    "hint": "1993 SRK's obsessive stalker thriller",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/6y601CavDK46ap8uxeoXxpArU8p.jpg"
+  },
+  {
+    "id": "w005",
+    "category": "film_title",
+    "word": "Rangeela",
+    "hint": "1995 Aamir-Urmila Ram Gopal Varma musical",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/tUGVpmgWhsg9rZCDNSUW7MJWSKf.jpg"
+  },
+  {
+    "id": "w006",
+    "category": "film_title",
+    "word": "Dil",
+    "hint": "1990 Aamir Khan-Madhuri campus romance",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/aecBFir2aF59MOflpYimaFu7hnI.jpg"
+  },
+  {
+    "id": "w007",
+    "category": "film_title",
+    "word": "Saajan",
+    "hint": "1991 Salman-Madhuri-Sanjay love triangle",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/eGhRH3y3AN6VvXaMo12KgNsbMrI.jpg"
+  },
+  {
+    "id": "w008",
+    "category": "film_title",
+    "word": "Hum",
+    "hint": "1991 Amitabh Bachchan action blockbuster",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/wbsQL6uodqJdzbY1dcUHVIOKiv6.jpg"
+  },
+  {
+    "id": "w009",
+    "category": "film_title",
+    "word": "Devdas",
+    "hint": "2002 Bhansali's doomed lover saga",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/dUBFi7bnLRfm4WaTh4ZoF2tbBJj.jpg"
+  },
+  {
+    "id": "w010",
+    "category": "film_title",
+    "word": "Black",
+    "hint": "2005 Amitabh-Rani disability drama by Bhansali",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+  },
+  {
+    "id": "w011",
+    "category": "film_title",
+    "word": "Ghajini",
+    "hint": "2008 Aamir Khan anterograde amnesia thriller",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/kaj131xxVxJRCthraiaxRrCt7X.jpg"
+  },
+  {
+    "id": "w012",
+    "category": "film_title",
+    "word": "Dabangg",
+    "hint": "2010 Salman Khan's iconic small-town cop film",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/bi2J6IrRK7oFK63EMbzORIos8KP.jpg"
+  },
+  {
+    "id": "w013",
+    "category": "film_title",
+    "word": "Barfi",
+    "hint": "2012 Ranbir Kapoor silent comedy-drama",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/5cJIx2zKjDoUtPSliou23xsReb1.jpg"
+  },
+  {
+    "id": "w014",
+    "category": "film_title",
+    "word": "Dangal",
+    "hint": "2016 Aamir as wrestling coach Mahavir Phogat",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/1CoKNi3XVyijPCvy0usDbSWEXAg.jpg"
+  },
+  {
+    "id": "w015",
+    "category": "film_title",
+    "word": "Raazi",
+    "hint": "2018 Alia Bhatt as spy bride in Pakistan",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/fF2xXApETxZqyluokyJ1x4gIiTf.jpg"
+  },
+  {
+    "id": "w016",
+    "category": "film_title",
+    "word": "Uri",
+    "hint": "2019 surgical strike film with Vicky Kaushal",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/yNySAgpAnWmPpYinim9E0tUzJWG.jpg"
+  },
+  {
+    "id": "w017",
+    "category": "film_title",
+    "word": "Stree",
+    "hint": "2018 horror-comedy about a ghost who takes men",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2xLDWr72Wxc1JGmbxza2V8g26YH.jpg"
+  },
+  {
+    "id": "w018",
+    "category": "film_title",
+    "word": "Pathaan",
+    "hint": "2023 SRK's comeback spy blockbuster",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/arf00BkwvXo0CFKbaD9OpqdE4Nu.jpg"
+  },
+  {
+    "id": "w019",
+    "category": "film_title",
+    "word": "Zindagi",
+    "hint": "2011 ZNMD — three friends road trip in Spain",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/zdHu2jWTbJTqCVdzFBhCAPIBwFa.jpg"
+  },
+  {
+    "id": "w020",
+    "category": "film_title",
+    "word": "Taare",
+    "hint": "2007 Aamir Khan's dyslexia film (first word)",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/rF1QYVbSBeFyXotvY5VgDbHZltE.jpg"
+  },
+  {
+    "id": "w021",
+    "category": "film_title",
+    "word": "Rang",
+    "hint": "2006 Aamir Khan student revolution drama",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/lJ9zrLsNoizF17o8De3pJgRRulv.jpg"
+  },
+  {
+    "id": "w022",
+    "category": "film_title",
+    "word": "Omkara",
+    "hint": "2006 Vishal Bhardwaj Othello adaptation",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/vMQAACgX3XIvaHQ957KqMo2eEtr.jpg"
+  },
+  {
+    "id": "w023",
+    "category": "film_title",
+    "word": "Veer",
+    "hint": "2004 SRK-Preity cross-border romance",
+    "imageUrl": ""
+  },
+  {
+    "id": "w024",
+    "category": "film_title",
+    "word": "Mohabbatein",
+    "hint": "2000 Amitabh vs SRK in a school of love",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/dDsYaBazrYKg9bv8qgsEohZQMat.jpg"
+  },
+  {
+    "id": "w025",
+    "category": "film_title",
+    "word": "Bajrangi",
+    "hint": "2015 Salman reunites Pakistani child with family",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/vhlliI7HZZlWfo5d6CiyfBAGLrW.jpg"
+  },
+  {
+    "id": "w026",
+    "category": "film_title",
+    "word": "Shershaah",
+    "hint": "2021 Sidharth Malhotra as Captain Vikram Batra",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/zGvFnwoXJKrYnKhoVPytqkqCJ8V.jpg"
+  },
+  {
+    "id": "w027",
+    "category": "film_title",
+    "word": "Animal",
+    "hint": "2023 Ranbir Kapoor's dark father-son revenge saga",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/6pzI1DIlxwAFffw9OZcG6cr031U.jpg"
+  },
+  {
+    "id": "w028",
+    "category": "film_title",
+    "word": "Gully",
+    "hint": "2019 Ranveer Singh as Mumbai street rapper",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/1nxsPC47Ve07jCqi0PpNJtBlPRm.jpg"
+  },
+  {
+    "id": "w029",
+    "category": "film_title",
+    "word": "Tanhaji",
+    "hint": "2020 Ajay Devgn as Maratha warrior Tanhaji Malusare",
+    "imageUrl": ""
+  },
+  {
+    "id": "w030",
+    "category": "film_title",
+    "word": "Sultan",
+    "hint": "2016 Salman Khan as comeback wrestling champion",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/zvfp8k0x2BC2M2qOcZxmFiEk4Sn.jpg"
+  },
+  {
+    "id": "w031",
+    "category": "hero_dialogue",
+    "word": "Mogambo",
+    "hint": "Mr. India 1987 — villain's catchphrase of delight",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/nqDJ8vuVFYymUhOUKcGCZoHy4tu.jpg"
+  },
+  {
+    "id": "w032",
+    "category": "hero_dialogue",
+    "word": "Palat",
+    "hint": "DDLJ 1995 — Raj tests Simran's love at station",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2CAL2433ZeIihfX1Hb2139CX0pW.jpg"
+  },
+  {
+    "id": "w033",
+    "category": "hero_dialogue",
+    "word": "Picture",
+    "hint": "Dabangg 2010 — Chulbul Pandey's ending taunt",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/bi2J6IrRK7oFK63EMbzORIos8KP.jpg"
+  },
+  {
+    "id": "w034",
+    "category": "hero_dialogue",
+    "word": "Kiran",
+    "hint": "Darr 1993 — Rahul's stuttering obsession",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/6y601CavDK46ap8uxeoXxpArU8p.jpg"
+  },
+  {
+    "id": "w035",
+    "category": "hero_dialogue",
+    "word": "Baap",
+    "hint": "Shahenshah 1988 — Amitabh's father identity reveal",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2ZUpj73MzEh2YwVzJNVUqBSu2LZ.jpg"
+  },
+  {
+    "id": "w036",
+    "category": "hero_dialogue",
+    "word": "Commitment",
+    "hint": "Salman Khan's iconic self-promise dialogue",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/ybM400b3vesnoNzOlTlAmHeEYPq.jpg"
+  },
+  {
+    "id": "w037",
+    "category": "hero_dialogue",
+    "word": "Namumkin",
+    "hint": "Don 2006 — catching Don is impossible",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/lgG2uNEvdmgVs9k8RlTA9JqxsQs.jpg"
+  },
+  {
+    "id": "w038",
+    "category": "hero_dialogue",
+    "word": "Jhappi",
+    "hint": "Munna Bhai 2003 — the magical healing hug",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/hhZUjxoSGH9FlHZwm5mmiDRTjSd.jpg"
+  },
+  {
+    "id": "w039",
+    "category": "hero_dialogue",
+    "word": "Tiger",
+    "hint": "Tiger Zinda Hai 2017 — hero declares himself alive",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/mdzNLFfCfuBoJz43l0SmMWWdu5t.jpg"
+  },
+  {
+    "id": "w040",
+    "category": "hero_dialogue",
+    "word": "Apna",
+    "hint": "Gully Boy 2019 — rapper's rise anthem dialogue",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/4RE7TD5TqEXbPKyUHcn7CSeMlrJ.jpg"
+  },
+  {
+    "id": "w041",
+    "category": "hero_dialogue",
+    "word": "Vijay",
+    "hint": "Agneepath 1990 — Amitabh's full name declaration",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/xO9sErs0c3XMzh8O34ygQWcENTj.jpg"
+  },
+  {
+    "id": "w042",
+    "category": "hero_dialogue",
+    "word": "Rishte",
+    "hint": "Shahenshah 1988 — opens the famous baap line",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2ZUpj73MzEh2YwVzJNVUqBSu2LZ.jpg"
+  },
+  {
+    "id": "w043",
+    "category": "hero_dialogue",
+    "word": "Desh",
+    "hint": "Swades 2004 — SRK's emotional return to motherland",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/yUSL24kpHc9Nls4Pohia4shgcIM.jpg"
+  },
+  {
+    "id": "w044",
+    "category": "hero_dialogue",
+    "word": "Circuit",
+    "hint": "Munna Bhai 2003 — sidekick's iconic nickname in dialogue",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/hhZUjxoSGH9FlHZwm5mmiDRTjSd.jpg"
+  },
+  {
+    "id": "w045",
+    "category": "hero_dialogue",
+    "word": "Jaadu",
+    "hint": "Koi Mil Gaya 2003 — alien's name, means magic",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2iJVauDYcYxRRGciTmAOSjiATf9.jpg"
+  },
+  {
+    "id": "w046",
+    "category": "hero_dialogue",
+    "word": "Senorita",
+    "hint": "ZNMD 2011 — Hrithik's flirty one-liner in Spain",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/hKO9O715wYxjkQSEv47giCYcyO8.jpg"
+  },
+  {
+    "id": "w047",
+    "category": "hero_dialogue",
+    "word": "Rowdy",
+    "hint": "Rowdy Rathore 2012 — Akshay's double-role self-label",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/ytdp64MDSpONpm932nQcMTD95IF.jpg"
+  },
+  {
+    "id": "w048",
+    "category": "hero_dialogue",
+    "word": "Tapori",
+    "hint": "Rangeela 1995 — Aamir's street-smart character tag",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/tUGVpmgWhsg9rZCDNSUW7MJWSKf.jpg"
+  },
+  {
+    "id": "w049",
+    "category": "hero_dialogue",
+    "word": "Khalnayak",
+    "hint": "Khalnayak 1993 — Sanjay Dutt's villain self-declaration",
+    "imageUrl": ""
+  },
+  {
+    "id": "w050",
+    "category": "hero_dialogue",
+    "word": "Bhai",
+    "hint": "Wanted 2009 — Salman's authority street address",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/njy7Pz7ZHZceO7lNfGIHKphY8Hd.jpg"
+  },
+  {
+    "id": "w051",
+    "category": "hero_dialogue",
+    "word": "Naam",
+    "hint": "Agneepath 1990 — Vijay states his full name proudly",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/xO9sErs0c3XMzh8O34ygQWcENTj.jpg"
+  },
+  {
+    "id": "w052",
+    "category": "hero_dialogue",
+    "word": "Pagal",
+    "hint": "DTPH 1997 — SRK's romantic admission to Madhuri",
+    "imageUrl": ""
+  },
+  {
+    "id": "w053",
+    "category": "hero_dialogue",
+    "word": "Don",
+    "hint": "Don 2006 — SRK's identity claim in the police station",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/lgG2uNEvdmgVs9k8RlTA9JqxsQs.jpg"
+  },
+  {
+    "id": "w054",
+    "category": "hero_dialogue",
+    "word": "Dil",
+    "hint": "Dil Se 1998 — SRK's intense love monologue",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/rCoGw9cp0EY2Rd504iqqjSDtepF.jpg"
+  },
+  {
+    "id": "w055",
+    "category": "hero_dialogue",
+    "word": "Bhidu",
+    "hint": "Vaastav 1999 — Sanjay Dutt's Mumbai street slang",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/fsB57eZ0EJ9nXLxgfjQG9iYiswH.jpg"
+  },
+  {
+    "id": "w056",
+    "category": "hero_dialogue",
+    "word": "Takkar",
+    "hint": "Tezaab 1988 — Anil Kapoor's street brawl challenge",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/vwXVAAxuyDNfUSxYPS6YqRm80Cm.jpg"
+  },
+  {
+    "id": "w057",
+    "category": "hero_dialogue",
+    "word": "Jawan",
+    "hint": "Jawan 2023 — SRK's female-squad mission war cry",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg"
+  },
+  {
+    "id": "w058",
+    "category": "hero_dialogue",
+    "word": "Babu",
+    "hint": "Hera Pheri 2000 — Akshay Kumar's confused catchphrase",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/23MKGUPT5laTStim4TaGhfgSltu.jpg"
+  },
+  {
+    "id": "w059",
+    "category": "hero_dialogue",
+    "word": "Shahenshah",
+    "hint": "Shahenshah 1988 — Amitabh's vigilante alter-ego name",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2ZUpj73MzEh2YwVzJNVUqBSu2LZ.jpg"
+  },
+  {
+    "id": "w060",
+    "category": "hero_dialogue",
+    "word": "Aye",
+    "hint": "Hera Pheri 2000 — Babu Bhaiya's signature confused yelp",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/23MKGUPT5laTStim4TaGhfgSltu.jpg"
+  },
+  {
+    "id": "w061",
+    "category": "celeb",
+    "word": "Bachchan",
+    "hint": "The original angry young man of Bollywood",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/u69PvpWqGkywSm0YjFiw77j9eqS.jpg"
+  },
+  {
+    "id": "w062",
+    "category": "celeb",
+    "word": "Bhai",
+    "hint": "Salman Khan's beloved nickname across India",
+    "imageUrl": ""
+  },
+  {
+    "id": "w063",
+    "category": "celeb",
+    "word": "SRK",
+    "hint": "King Khan — initials of the biggest romantic star",
+    "imageUrl": ""
+  },
+  {
+    "id": "w064",
+    "category": "celeb",
+    "word": "Chopra",
+    "hint": "She went global — Quantico, Miss World, Citadel",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/4hLAhScWZA6utfg8VCivwVH6FHy.jpg"
+  },
+  {
+    "id": "w065",
+    "category": "celeb",
+    "word": "Kapoor",
+    "hint": "Kareena, Ranbir, Sonam — a dynasty of stars",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/cjUTpkzSklRAAazbC5bXcLV60eb.jpg"
+  },
+  {
+    "id": "w066",
+    "category": "celeb",
+    "word": "Alia",
+    "hint": "Gangubai actress who married Ranbir Kapoor",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/aUc0hlILKfDKhlKnWQliGjkQL9a.jpg"
+  },
+  {
+    "id": "w067",
+    "category": "celeb",
+    "word": "Ranveer",
+    "hint": "Rocky Aur Rani — Bollywood's most flamboyant dresser",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/sRiwLmhduFghJo8U2coUafnDD4C.jpg"
+  },
+  {
+    "id": "w068",
+    "category": "celeb",
+    "word": "Hrithik",
+    "hint": "Greek god looks, starred in Krrish and War",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/5O7WrWe84WDFj7td64NVsobtHf3.jpg"
+  },
+  {
+    "id": "w069",
+    "category": "celeb",
+    "word": "Katrina",
+    "hint": "British-Indian actress, starred with Salman and SRK",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/xVDdjfAtrK7G4YmLUI7WsWR3Omu.jpg"
+  },
+  {
+    "id": "w070",
+    "category": "celeb",
+    "word": "Kajol",
+    "hint": "DDLJ heroine — Ajay Devgn's real-life wife",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/h4m0TkDuEMCUNaPrQxMRyFb2AQ7.jpg"
+  },
+  {
+    "id": "w071",
+    "category": "celeb",
+    "word": "Madhuri",
+    "hint": "90s queen — Ek Do Teen and Dola Re Dola",
+    "imageUrl": ""
+  },
+  {
+    "id": "w072",
+    "category": "celeb",
+    "word": "Aishwarya",
+    "hint": "Miss World 1994 — Devdas, Jodhaa Akbar actress",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/nWBRXghGE5UAPf0EWxmlI3DxtcB.jpg"
+  },
+  {
+    "id": "w073",
+    "category": "celeb",
+    "word": "Akshay",
+    "hint": "Khiladi Kumar — Padman and Mission Mangal hero",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/sR8nASRtTpiwXqkFHjG2jdRBZ7a.jpg"
+  },
+  {
+    "id": "w074",
+    "category": "celeb",
+    "word": "Ajay",
+    "hint": "Singham actor — known for stoic action roles",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/vnHQQFzTjJ0sv14DGMIoKa3qTxN.jpg"
+  },
+  {
+    "id": "w075",
+    "category": "celeb",
+    "word": "Shahid",
+    "hint": "Kabir Singh and Haider — chocolate boy gone intense",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/xzxlmVfiUeuTyo0mNodlZqyjBU6.jpg"
+  },
+  {
+    "id": "w076",
+    "category": "celeb",
+    "word": "Ranbir",
+    "hint": "Saawariya to Animal — Kapoor clan's reigning king",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/a5xWgKh7f4XofIl7ZwisxOi616K.jpg"
+  },
+  {
+    "id": "w077",
+    "category": "celeb",
+    "word": "Deepika",
+    "hint": "Padmaavat actress — Ranveer Singh's wife",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/rzvvBQ0r6oiqDdzcsdTRB7jN4Rx.jpg"
+  },
+  {
+    "id": "w078",
+    "category": "celeb",
+    "word": "Taapsee",
+    "hint": "Pink and Thappad — the firebrand actress",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/43e24aeOC8AZITo6ShaKKG9aV0Y.jpg"
+  },
+  {
+    "id": "w079",
+    "category": "celeb",
+    "word": "Vidya",
+    "hint": "Kahaani and Dirty Picture — Balan the powerhouse",
+    "imageUrl": ""
+  },
+  {
+    "id": "w080",
+    "category": "celeb",
+    "word": "Kangana",
+    "hint": "Queen actress — from Manali to Manikarnika",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/oTApEkvktswhQOyfsAglJEEJBFW.jpg"
+  },
+  {
+    "id": "w081",
+    "category": "celeb",
+    "word": "Tiger",
+    "hint": "War and Baaghi — Jackie Shroff's acrobatic son",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/kgvll1RBCcDTs6KJZFDb291AuZb.jpg"
+  },
+  {
+    "id": "w082",
+    "category": "celeb",
+    "word": "Varun",
+    "hint": "Student of the Year to Bhediya — Dhawan",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2N9LTqRxLpeCCyNTYUpnVBhZiZU.jpg"
+  },
+  {
+    "id": "w083",
+    "category": "celeb",
+    "word": "Kartik",
+    "hint": "Bhool Bhulaiyaa 2 and Satyaprem Ki Katha hero",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/nHdQlBvORSKmH1F1kbyTFs0HLjU.jpg"
+  },
+  {
+    "id": "w084",
+    "category": "celeb",
+    "word": "Sanjay",
+    "hint": "Munna Bhai and Vaastav — Dutt the legend",
+    "imageUrl": ""
+  },
+  {
+    "id": "w085",
+    "category": "celeb",
+    "word": "Govinda",
+    "hint": "90s comedy king — Coolie No. 1 and Hero No. 1",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/jIY8akWgvhgbIgZDd20yIPFDSv8.jpg"
+  },
+  {
+    "id": "w086",
+    "category": "celeb",
+    "word": "Nawaz",
+    "hint": "Gangs of Wasseypur — Siddiqui the character actor",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/oEInjDPIkJgJg7xWr6ZJdtL9iN7.jpg"
+  },
+  {
+    "id": "w087",
+    "category": "celeb",
+    "word": "Pankaj",
+    "hint": "Stree and Mimi — Tripathi the everyman genius",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/jMCbxWYE93ngGvvx2M4ysbcPRkE.jpg"
+  },
+  {
+    "id": "w088",
+    "category": "celeb",
+    "word": "Irrfan",
+    "hint": "Life of Pi and Piku — Khan the world-class talent",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/qkA9PpWJRw3rNjVkWfNZdwLvRZx.jpg"
+  },
+  {
+    "id": "w089",
+    "category": "celeb",
+    "word": "Sushmita",
+    "hint": "Miss Universe 1994 — Main Hoon Na actress",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/arteijssIoHzs8wFLjs6pvqRnlJ.jpg"
+  },
+  {
+    "id": "w090",
+    "category": "celeb",
+    "word": "Anushka",
+    "hint": "NH10 and Band Baaja Baaraat — Sharma the producer",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/zpe6Es8kdNOXuPdXiJvqxzsmN6z.jpg"
+  },
+  {
+    "id": "w091",
+    "category": "song",
+    "word": "Chaiyya",
+    "hint": "Dil Se 1998 — AR Rahman train-top SRK dance",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/rCoGw9cp0EY2Rd504iqqjSDtepF.jpg"
+  },
+  {
+    "id": "w092",
+    "category": "song",
+    "word": "Kajra",
+    "hint": "Bunty Aur Babli 2005 — Aishwarya's sultry eye song",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/32OxUzs9ETQ3QvLFFYaDuuAtq3Y.jpg"
+  },
+  {
+    "id": "w093",
+    "category": "song",
+    "word": "Masakali",
+    "hint": "Delhi-6 2009 — AR Rahman's beloved pigeon song",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/52raGhYfU3oM25imWZFZnQ16XZI.jpg"
+  },
+  {
+    "id": "w094",
+    "category": "song",
+    "word": "Munni",
+    "hint": "Dabangg 2010 — Malaika Arora's item number",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/bi2J6IrRK7oFK63EMbzORIos8KP.jpg"
+  },
+  {
+    "id": "w095",
+    "category": "song",
+    "word": "Sheila",
+    "hint": "Tees Maar Khan 2010 — Katrina's seductive number",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/xhbaxPSFA78hQpsSekPLdBoyGIK.jpg"
+  },
+  {
+    "id": "w096",
+    "category": "song",
+    "word": "Lungi",
+    "hint": "Chennai Express 2013 — Honey Singh tribute to Rajinikanth",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/9j7XfhBJKNfidMCa8JsNbqU1waV.jpg"
+  },
+  {
+    "id": "w097",
+    "category": "song",
+    "word": "Badtameez",
+    "hint": "YJHD 2013 — Ranbir-Deepika's playful dance anthem",
+    "imageUrl": ""
+  },
+  {
+    "id": "w098",
+    "category": "song",
+    "word": "Nagada",
+    "hint": "Ram-Leela 2013 — Deepika's dhol festival dance",
+    "imageUrl": ""
+  },
+  {
+    "id": "w099",
+    "category": "song",
+    "word": "Gerua",
+    "hint": "Dilwale 2015 — SRK-Kajol Iceland romantic ballad",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/oQJfbkVuRsP8RdUVRzYOzYByd4B.jpg"
+  },
+  {
+    "id": "w100",
+    "category": "song",
+    "word": "Bulleya",
+    "hint": "Ae Dil Hai Mushkil 2016 — Sufi heartbreak masterpiece",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/hlDOF4UhUqrYY7gqLk3Rl0Fx4ns.jpg"
+  },
+  {
+    "id": "w101",
+    "category": "song",
+    "word": "Zaalima",
+    "hint": "Raees 2017 — SRK-Mahira Khan soulful romantic duet",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/zFYFUfnoXWxeA3n7v4acEqgk2iE.jpg"
+  },
+  {
+    "id": "w102",
+    "category": "song",
+    "word": "Kesariya",
+    "hint": "Brahmastra 2022 — Ranbir-Alia saffron love anthem",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/mxJxyHoc8OqYK1f7YtbhRTLOl0k.jpg"
+  },
+  {
+    "id": "w103",
+    "category": "song",
+    "word": "Besharam",
+    "hint": "Pathaan 2023 — Deepika's yellow bikini item number",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/arf00BkwvXo0CFKbaD9OpqdE4Nu.jpg"
+  },
+  {
+    "id": "w104",
+    "category": "song",
+    "word": "Balam",
+    "hint": "YJHD 2013 — Holi colours party pichkari anthem",
+    "imageUrl": ""
+  },
+  {
+    "id": "w105",
+    "category": "song",
+    "word": "Chammak",
+    "hint": "Ra.One 2011 — Akon and SRK's electronic club song",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/qwC3rbgCI0frJpRxVm74Ak3ktpU.jpg"
+  },
+  {
+    "id": "w106",
+    "category": "song",
+    "word": "Naatu",
+    "hint": "RRR 2022 — Oscar-winning Telugu-Hindi dance extravaganza",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/u0XUBNQWlOvrh0Gd97ARGpIkL0.jpg"
+  },
+  {
+    "id": "w107",
+    "category": "song",
+    "word": "Jhoome",
+    "hint": "Pathaan 2023 — SRK's triumphant return dance number",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/arf00BkwvXo0CFKbaD9OpqdE4Nu.jpg"
+  },
+  {
+    "id": "w108",
+    "category": "song",
+    "word": "Naina",
+    "hint": "Dangal 2016 — emotional ballad from Aamir Khan film",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/1CoKNi3XVyijPCvy0usDbSWEXAg.jpg"
+  },
+  {
+    "id": "w109",
+    "category": "song",
+    "word": "Channa",
+    "hint": "ADHM 2016 — Ranbir's heartbreak Sufi classic",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/hlDOF4UhUqrYY7gqLk3Rl0Fx4ns.jpg"
+  },
+  {
+    "id": "w110",
+    "category": "song",
+    "word": "Ek Do Teen",
+    "hint": "Tezaab 1988 — Madhuri Dixit's iconic dance debut",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/vwXVAAxuyDNfUSxYPS6YqRm80Cm.jpg"
+  },
+  {
+    "id": "w111",
+    "category": "song",
+    "word": "Tip Tip",
+    "hint": "Mohra 1994 — Raveena Tandon's legendary rain dance",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/nWAptaCNiTIJtv9cYqfF5E7qm0I.jpg"
+  },
+  {
+    "id": "w112",
+    "category": "song",
+    "word": "Dola",
+    "hint": "Devdas 2002 — Madhuri-Aishwarya mujra face-off",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/dUBFi7bnLRfm4WaTh4ZoF2tbBJj.jpg"
+  },
+  {
+    "id": "w113",
+    "category": "song",
+    "word": "Tujhe",
+    "hint": "DDLJ 1995 — Lata Mangeshkar's timeless ballad",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2CAL2433ZeIihfX1Hb2139CX0pW.jpg"
+  },
+  {
+    "id": "w114",
+    "category": "song",
+    "word": "Didi",
+    "hint": "Hum Aapke Hain Koun 1994 — the devar-bhabhi comedy song",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/v5CutZgZgai1if2U2CPssiig7VW.jpg"
+  },
+  {
+    "id": "w115",
+    "category": "song",
+    "word": "Gulabi",
+    "hint": "Shuddh Desi Romance 2013 — peppy pink love song",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/j141I2N8e8HuVHEDNPZ1K2qeqM4.jpg"
+  },
+  {
+    "id": "w116",
+    "category": "song",
+    "word": "Swag",
+    "hint": "Tiger Zinda Hai 2017 — Salman-Katrina swagger anthem",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/mdzNLFfCfuBoJz43l0SmMWWdu5t.jpg"
+  },
+  {
+    "id": "w117",
+    "category": "song",
+    "word": "Afghan",
+    "hint": "Phantom 2015 — Katrina Kaif's jalebi-inspired dance",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/hgoWjp9Sh0MI97eAMZCnIoVfgvq.jpg"
+  },
+  {
+    "id": "w118",
+    "category": "song",
+    "word": "Aankh",
+    "hint": "Simmba 2018 — Neha Kakkar's retro recreation",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/ulQO4XJ1xlWdl4vX8Lr3SbWRfZw.jpg"
+  },
+  {
+    "id": "w119",
+    "category": "song",
+    "word": "Gallan",
+    "hint": "Dil Dhadakne Do 2015 — rooftop Punjabi party song",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/AqFX6282JM2ollS4XTFp6t6Dwa9.jpg"
+  },
+  {
+    "id": "w120",
+    "category": "song",
+    "word": "Kar Gayi",
+    "hint": "Kapoor & Sons 2016 — Ali Zafar's chull party hit",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/oPdcOInH8TqR5udDTDPiDuLSN90.jpg"
+  },
+  {
+    "id": "w121",
+    "category": "character",
+    "word": "Simran",
+    "hint": "DDLJ 1995 — Kajol waiting for Raj at the station",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2CAL2433ZeIihfX1Hb2139CX0pW.jpg"
+  },
+  {
+    "id": "w122",
+    "category": "character",
+    "word": "Raj",
+    "hint": "DDLJ 1995 — SRK's charming NRI romantic hero",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/2CAL2433ZeIihfX1Hb2139CX0pW.jpg"
+  },
+  {
+    "id": "w123",
+    "category": "character",
+    "word": "Poo",
+    "hint": "K3G 2001 — Kareena's iconic self-obsessed fashionista",
+    "imageUrl": ""
+  },
+  {
+    "id": "w124",
+    "category": "character",
+    "word": "Rahul",
+    "hint": "KKHH 1998 — SRK's widowed college heartthrob",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/5FmtHHDGPofW5Zjns1EM1D8503c.jpg"
+  },
+  {
+    "id": "w125",
+    "category": "character",
+    "word": "Anjali",
+    "hint": "KKHH 1998 — Kajol's tomboy who secretly loved Rahul",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/5FmtHHDGPofW5Zjns1EM1D8503c.jpg"
+  },
+  {
+    "id": "w126",
+    "category": "character",
+    "word": "Munnabhai",
+    "hint": "Munna Bhai 2003 — lovable Bandra goon turned doctor",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/hhZUjxoSGH9FlHZwm5mmiDRTjSd.jpg"
+  },
+  {
+    "id": "w127",
+    "category": "character",
+    "word": "Circuit",
+    "hint": "Munna Bhai 2003 — Arshad Warsi's loyal sidekick",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/hhZUjxoSGH9FlHZwm5mmiDRTjSd.jpg"
+  },
+  {
+    "id": "w128",
+    "category": "character",
+    "word": "Geet",
+    "hint": "Jab We Met 2007 — Kareena's unstoppable Punjabi chatterbox",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/iqiH6vnoEgjAypKsuIScN7JlE2j.jpg"
+  },
+  {
+    "id": "w129",
+    "category": "character",
+    "word": "Devdas",
+    "hint": "Devdas 2002 — SRK's self-destructive alcohol-drenched lover",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/dUBFi7bnLRfm4WaTh4ZoF2tbBJj.jpg"
+  },
+  {
+    "id": "w130",
+    "category": "character",
+    "word": "Paro",
+    "hint": "Devdas 2002 — Aishwarya's childhood sweetheart",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/dUBFi7bnLRfm4WaTh4ZoF2tbBJj.jpg"
+  },
+  {
+    "id": "w131",
+    "category": "character",
+    "word": "Chandramukhi",
+    "hint": "Devdas 2002 — Madhuri's golden-hearted courtesan",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/dUBFi7bnLRfm4WaTh4ZoF2tbBJj.jpg"
+  },
+  {
+    "id": "w132",
+    "category": "character",
+    "word": "Bunny",
+    "hint": "YJHD 2013 — Ranbir Kapoor's free-spirited wanderer",
+    "imageUrl": ""
+  },
+  {
+    "id": "w133",
+    "category": "character",
+    "word": "Naina",
+    "hint": "YJHD 2013 — Deepika Padukone's doctor on road trip",
+    "imageUrl": ""
+  },
+  {
+    "id": "w134",
+    "category": "character",
+    "word": "Murad",
+    "hint": "Gully Boy 2019 — Ranveer Singh's rapper from Dharavi",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/4RE7TD5TqEXbPKyUHcn7CSeMlrJ.jpg"
+  },
+  {
+    "id": "w135",
+    "category": "character",
+    "word": "Sehmat",
+    "hint": "Raazi 2018 — Alia Bhatt's Pakistani spy bride",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/fF2xXApETxZqyluokyJ1x4gIiTf.jpg"
+  },
+  {
+    "id": "w136",
+    "category": "character",
+    "word": "Babita",
+    "hint": "Dangal 2016 — the younger wrestling Phogat sister",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/1CoKNi3XVyijPCvy0usDbSWEXAg.jpg"
+  },
+  {
+    "id": "w137",
+    "category": "character",
+    "word": "Geeta",
+    "hint": "Dangal 2016 — the elder wrestling champion sister",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/1CoKNi3XVyijPCvy0usDbSWEXAg.jpg"
+  },
+  {
+    "id": "w138",
+    "category": "character",
+    "word": "Sultan",
+    "hint": "Sultan 2016 — Salman's fallen-and-rising wrestling hero",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/zvfp8k0x2BC2M2qOcZxmFiEk4Sn.jpg"
+  },
+  {
+    "id": "w139",
+    "category": "character",
+    "word": "Don",
+    "hint": "Don 2006 — SRK's dual-identity international crime lord",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/lgG2uNEvdmgVs9k8RlTA9JqxsQs.jpg"
+  },
+  {
+    "id": "w140",
+    "category": "character",
+    "word": "Piku",
+    "hint": "Piku 2015 — Deepika's uptight Delhi architect daughter",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/yo7EZWiLpLGhqs3YnlDGDBPjfTb.jpg"
+  },
+  {
+    "id": "w141",
+    "category": "character",
+    "word": "Rani",
+    "hint": "Queen 2014 — Kangana's solo honeymoon self-discovery hero",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/dfFVDIgovEfQZn53VRKLV2JQnRJ.jpg"
+  },
+  {
+    "id": "w142",
+    "category": "character",
+    "word": "Chulbul",
+    "hint": "Dabangg 2010 — Salman's corrupt-yet-good small-town cop",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/bi2J6IrRK7oFK63EMbzORIos8KP.jpg"
+  },
+  {
+    "id": "w143",
+    "category": "character",
+    "word": "Aman",
+    "hint": "Kal Ho Naa Ho 2003 — SRK's terminal illness secret",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/zhMI6I0kSLnewTMwE0A8Tz3Cj2f.jpg"
+  },
+  {
+    "id": "w144",
+    "category": "character",
+    "word": "Vijay",
+    "hint": "Agneepath 1990 — Amitabh's revenge-driven protagonist",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/xO9sErs0c3XMzh8O34ygQWcENTj.jpg"
+  },
+  {
+    "id": "w145",
+    "category": "character",
+    "word": "Aditya",
+    "hint": "Jab We Met 2007 — Shahid's heartbroken businessman",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/iqiH6vnoEgjAypKsuIScN7JlE2j.jpg"
+  },
+  {
+    "id": "w146",
+    "category": "character",
+    "word": "Vicky",
+    "hint": "Uri 2019 — Vicky Kaushal's Para SF commando hero",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/yNySAgpAnWmPpYinim9E0tUzJWG.jpg"
+  },
+  {
+    "id": "w147",
+    "category": "character",
+    "word": "Haider",
+    "hint": "Haider 2014 — Shahid's Kashmir Hamlet figure",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/gjc39e8ywn4KeeuQnjI5BQtWBc6.jpg"
+  },
+  {
+    "id": "w148",
+    "category": "character",
+    "word": "Sardar",
+    "hint": "Gangs of Wasseypur 2012 — Manoj Bajpayee's coal mafia don",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/xAy208Znkingmfnb5ZbULwLyIwW.jpg"
+  },
+  {
+    "id": "w149",
+    "category": "character",
+    "word": "Tara",
+    "hint": "Dil Dhadakne Do 2015 — Anushka Sharma's free spirit",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/AqFX6282JM2ollS4XTFp6t6Dwa9.jpg"
+  },
+  {
+    "id": "w150",
+    "category": "character",
+    "word": "Kabir",
+    "hint": "Kabir Singh 2019 — Shahid's self-destructive surgeon",
+    "imageUrl": "https://image.tmdb.org/t/p/w500/unqiPjtc6CGqs13zho7ZvWU85zu.jpg"
+  }
 ]
