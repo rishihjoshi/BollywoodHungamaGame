@@ -1,7 +1,7 @@
 {
   "name": "Bollywood Hungama",
   "short_name": "BH Game",
-  "description": "The Bollywood party game of clues, bluffs and Naughty players",
+  "description": "The Sholay-inspired Bollywood party word game",
   "start_url": "./index.html",
   "display": "standalone",
   "display_override": ["standalone"],
@@ -35,6 +35,5 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ],
-  "screenshots": []
+  ]
 }

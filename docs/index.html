@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Bollywood Hungama — the Sholay-inspired Bollywood party word game">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BH Game">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="BH Game">
+  <meta name="theme-color" content="#FFD700">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Bollywood Hungama</title>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- Abandon-game confirmation modal -->
+<div class="abandon-modal hidden" id="abandon-modal">
+  <div class="abandon-box">
+    <h3>Abandon Game?</h3>
+    <p>All progress this round will be lost.</p>
+    <div class="abandon-actions">
+      <button class="btn btn-surface" id="btn-abandon-cancel">Stay</button>
+      <button class="btn btn-danger"  id="btn-abandon-confirm">Abandon</button>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+
+  <!-- ====================================================
+       SCREEN: Home
+       ==================================================== -->
+  <div data-screen="screen-home" class="screen-active">
+    <div class="spacer"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;width:100%">
+      <div class="home-logo">
+        <img src="./icons/icon.svg" alt="Bollywood Hungama">
+      </div>
+      <h1 class="game-title">Bollywood<br>Hungama</h1>
+      <p class="game-tagline">Jo Darr Gaya, Samjho Marr Gaya.<br>Find the Daku before it's too late.</p>
+    </div>
+    <div class="spacer"></div>
+    <div style="width:100%;max-width:320px;margin:0 auto">
+      <button class="btn btn-primary" id="btn-home-start">🎬 Start Game</button>
+      <button class="btn btn-ghost"   id="btn-home-rules" style="margin-top:10px">How to Play</button>
+      <button class="btn btn-surface" id="btn-home-scores" style="margin-top:10px">🏆 Scores</button>
+    </div>
+    <div style="height:24px"></div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: Setup
+       ==================================================== -->
+  <div data-screen="screen-setup">
+    <button class="screen-cancel" id="cancel-setup" aria-label="Cancel">✕</button>
+    <div class="setup-header">
+      <h2 class="screen-title">Who's Playing?</h2>
+    </div>
+    <p class="screen-subtitle">Minimum 3 players · Maximum 12</p>
+
+    <div id="player-list" class="player-list"></div>
+
+    <button class="btn btn-ghost btn-sm" id="btn-add-player" style="margin-bottom:14px">+ Add Player</button>
+
+    <div class="daku-info" id="daku-info">
+      <div class="daku-info-icon">💀</div>
+      <div class="daku-info-text" id="daku-info-text">Add players to see Daku count</div>
+    </div>
+
+    <div class="toggle-row">
+      <div class="toggle-label">
+        Show category to Daku?
+        <small>Daku sees the category but not the word</small>
+      </div>
+      <div class="toggle-switch on" id="toggle-category" role="switch" aria-checked="true"></div>
+    </div>
+
+    <div class="validation-msg" id="setup-validation"></div>
+
+    <div class="mt-auto">
+      <button class="btn btn-primary" id="btn-start-game" disabled>Start Game</button>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: Rules
+       ==================================================== -->
+  <div data-screen="screen-rules">
+    <div class="screen-back-header">
+      <button class="btn-back" id="btn-rules-back" aria-label="Back">‹</button>
+      <h2 class="screen-title" style="margin:0">How to Play</h2>
+    </div>
+    <div class="rules-content">
+      <h3>The Setup</h3>
+      <p>Enter 3–12 player names. The app secretly assigns everyone a Sholay character. <strong>1–3 players are Daku</strong> (villains), the rest are <strong>Gaon</strong> (heroes). Nobody knows who else is Daku!</p>
+
+      <h3>Role Reveals</h3>
+      <p>Pass the phone around. Each player taps to reveal their secret character — then memorises it and passes the phone. <strong>Don't show your screen to anyone.</strong></p>
+
+      <h3>Word Reveals</h3>
+      <p>Pass around again. <strong>Gaon players</strong> see the full secret Bollywood word. <strong>Daku players</strong> only see the category — they must blend in and fake it!</p>
+
+      <h3>The Game (No App Needed)</h3>
+      <ul>
+        <li>Each player says <strong>one word</strong> as a clue.</li>
+        <li>Daku tries to fake a plausible clue without knowing the word.</li>
+        <li>Discuss as a group, then vote on who the Daku is.</li>
+      </ul>
+
+      <h3>Scoring</h3>
+      <ul>
+        <li><strong>Gaon wins</strong> if all Dakus are correctly identified.</li>
+        <li><strong>Daku wins</strong> if even one Daku survives the vote.</li>
+      </ul>
+
+      <h3>Daku Count</h3>
+      <ul>
+        <li>3–5 players → 1 Daku (Gabbar)</li>
+        <li>6–8 players → 2 Dakus (Gabbar + Sambha)</li>
+        <li>9–12 players → 3 Dakus (Gabbar + Sambha + Kaalia)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: Scores
+       ==================================================== -->
+  <div data-screen="screen-scores">
+    <div class="screen-back-header">
+      <button class="btn-back" id="btn-scores-back" aria-label="Back">‹</button>
+      <h2 class="screen-title" style="margin:0">Scores</h2>
+    </div>
+
+    <div class="scores-stat-row">
+      <div class="stat-card">
+        <span class="stat-num" id="stat-rounds">0</span>
+        <div class="stat-label">Rounds</div>
+      </div>
+      <div class="stat-card gaon-wins">
+        <span class="stat-num" id="stat-gaon">0</span>
+        <div class="stat-label">Gaon Wins</div>
+      </div>
+      <div class="stat-card daku-wins">
+        <span class="stat-num" id="stat-daku">0</span>
+        <div class="stat-label">Daku Wins</div>
+      </div>
+    </div>
+
+    <div class="player-stat-table" id="player-stat-table"></div>
+
+    <button class="btn btn-muted btn-sm" id="btn-reset-scores" style="margin-top:auto">Reset All Scores</button>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: Role Reveal
+       ==================================================== -->
+  <div data-screen="screen-role-reveal">
+    <button class="screen-cancel" id="cancel-role-reveal" aria-label="Abandon game">✕</button>
+
+    <!-- Privacy gate -->
+    <div id="rr-privacy-gate" class="privacy-gate">
+      <div class="privacy-eyes">👀</div>
+      <p class="privacy-pass-label">Pass phone to</p>
+      <p class="privacy-name" id="rr-gate-name"></p>
+      <div class="privacy-btn-wrap">
+        <button class="btn btn-primary" id="btn-rr-reveal">🎭 Reveal My Role</button>
+      </div>
+    </div>
+
+    <!-- Revealed card view (hidden until tap) -->
+    <div id="rr-card-view" class="privacy-gate hidden">
+      <p class="privacy-pass-label" style="margin-bottom:2px">Your role,</p>
+      <p class="privacy-name" id="rr-card-name" style="margin-bottom:12px"></p>
+
+      <div class="flip-card flipped" id="rr-flip-card" style="max-width:320px">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-icon">🎬</div>
+            <div class="tap-hint">Tap to reveal</div>
+          </div>
+          <div class="flip-card-back" id="rr-card-back">
+            <div class="role-team-badge" id="rr-team-badge"></div>
+            <div class="role-char-name" id="rr-char-name"></div>
+            <div class="role-flavour" id="rr-flavour"></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="role-memorise" id="rr-memorise-hint">Memorise your role, then pass the phone</p>
+
+      <div style="width:100%;max-width:320px;margin-top:8px">
+        <button class="btn btn-primary" id="btn-rr-done">Done — Pass Phone</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: Word Reveal
+       ==================================================== -->
+  <div data-screen="screen-word-reveal">
+    <button class="screen-cancel" id="cancel-word-reveal" aria-label="Abandon game">✕</button>
+
+    <!-- Privacy gate -->
+    <div id="wr-privacy-gate" class="privacy-gate">
+      <div class="privacy-eyes">🤫</div>
+      <p class="privacy-pass-label">Pass phone to</p>
+      <p class="privacy-name" id="wr-gate-name"></p>
+      <div class="privacy-btn-wrap">
+        <button class="btn btn-primary" id="btn-wr-reveal">👁️ See My Word</button>
+      </div>
+    </div>
+
+    <!-- Word reveal view (hidden until tap) -->
+    <div id="wr-reveal-view" class="word-reveal-screen hidden">
+      <div id="wr-content"></div>
+      <div style="width:100%;max-width:320px;margin-top:16px">
+        <button class="btn btn-primary" id="btn-wr-done">Done — Pass Phone</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: Offline Play
+       ==================================================== -->
+  <div data-screen="screen-offline-play">
+    <button class="screen-cancel" id="cancel-offline" aria-label="Abandon game">✕</button>
+    <div class="spacer"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;width:100%">
+      <div class="game-on-card">
+        <div class="game-on-icon">🎬</div>
+        <div class="game-on-title">Game On!</div>
+        <div class="game-on-sub">Each player says ONE word as a clue. Daku must bluff. Discuss as a group, then vote on who the Daku is.</div>
+      </div>
+      <div style="width:100%;max-width:320px">
+        <button class="btn btn-primary" id="btn-done-playing">We're Done — Go to Reveal</button>
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: End (Reveal + Record + Scoreboard)
+       ==================================================== -->
+  <div data-screen="screen-end">
+    <button class="screen-cancel" id="cancel-end" aria-label="End game">✕</button>
+
+    <h2 class="screen-title" style="margin-top:48px">The Reveal</h2>
+    <p class="screen-subtitle" id="end-round-label"></p>
+
+    <!-- Secret word reveal -->
+    <div class="end-reveal-card">
+      <p class="end-section-title">🎯 Secret Word</p>
+      <p class="end-word" id="end-word"></p>
+      <p class="end-word-sub" id="end-word-hint"></p>
+      <div id="end-word-image-wrap" style="display:flex;justify-content:center;margin-top:8px"></div>
+    </div>
+
+    <!-- Daku identities -->
+    <div class="end-reveal-card" style="border-color:rgba(192,57,43,0.5)">
+      <p class="end-section-title" style="color:var(--color-red)">💀 The Daku(s)</p>
+      <div class="daku-reveal-list" id="daku-reveal-list"></div>
+    </div>
+
+    <!-- Record result -->
+    <div class="record-card">
+      <p class="end-section-title" style="color:var(--color-text-muted)">📋 Did Gaon catch the Daku(s)?</p>
+      <div id="catch-record-list"></div>
+    </div>
+
+    <!-- Round result banner (appears after all recorded) -->
+    <div class="round-result-banner" id="round-result-banner">
+      <div class="banner-icon" id="banner-icon"></div>
+      <div class="banner-title" id="banner-title"></div>
+      <div class="banner-sub" id="banner-sub"></div>
+    </div>
+
+    <!-- Running scoreboard (always visible) -->
+    <h3 style="font-family:var(--font-display);font-size:1rem;color:var(--color-gold);margin-bottom:10px">Running Scores</h3>
+    <div class="scores-stat-row" style="margin-bottom:12px">
+      <div class="stat-card">
+        <span class="stat-num" id="end-stat-rounds">0</span>
+        <div class="stat-label">Rounds</div>
+      </div>
+      <div class="stat-card gaon-wins">
+        <span class="stat-num" id="end-stat-gaon">0</span>
+        <div class="stat-label">Gaon</div>
+      </div>
+      <div class="stat-card daku-wins">
+        <span class="stat-num" id="end-stat-daku">0</span>
+        <div class="stat-label">Daku</div>
+      </div>
+    </div>
+    <div class="score-list" id="end-score-list"></div>
+
+    <div class="mt-auto" style="padding-bottom:8px">
+      <button class="btn btn-primary" id="btn-play-again">🔄 Play Again (Same Players)</button>
+      <button class="btn btn-ghost"   id="btn-end-home" style="margin-top:10px">End Game</button>
+    </div>
+  </div>
+
+</div><!-- #app -->
+
+<script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "bollywood-hungama",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TMDB image fetch script for BollywoodHungama PWA",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "fetch-images": "node scripts/fetch-tmdb-images.js"
+  }
+}
