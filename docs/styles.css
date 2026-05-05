@@ -355,37 +355,34 @@ button, input { font-family: inherit; -webkit-tap-highlight-color: transparent; 
 }
 .privacy-btn-wrap { width: 100%; max-width: 300px; }
 
-/* Flip card */
-.flip-card {
-  width: 100%; max-width: 320px; height: 240px;
-  perspective: 1200px; cursor: pointer;
+/* ── Role Reveal: scrollable layout (replaces privacy-gate for the card view) ── */
+.rr-reveal-view {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: calc(var(--safe-t) + 60px) 20px 0;
+  gap: 10px; text-align: center;
 }
-.flip-card-inner {
-  position: relative; width: 100%; height: 100%;
-  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-.flip-card-front, .flip-card-back {
-  position: absolute; inset: 0; border-radius: var(--radius-lg);
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 24px; gap: 10px;
-}
-.flip-card-front {
-  background: var(--color-surface-2); border: 2px solid var(--color-gold);
-}
-.flip-card-front .tap-hint { font-size: 0.8rem; color: var(--color-text-muted); }
-.flip-card-front .card-icon { font-size: 52px; }
+.rr-reveal-view.hidden { display: none; }
 
-/* DAKU card (dark red) */
-.flip-card-back.card-daku {
+/* ── Role card: scale-bounce animation (replaces broken iOS 3D flip) ── */
+@keyframes roleReveal {
+  from { transform: scale(0.72); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+.role-card {
+  width: 100%; max-width: 320px; flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 20px 16px; gap: 8px;
+  animation: roleReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.role-card.card-daku {
   background: linear-gradient(145deg, #2d0d0d, #7b241c);
   border: 2px solid var(--color-red);
   box-shadow: 0 0 28px rgba(192, 57, 43, 0.4);
 }
-/* GAON card (navy/gold) */
-.flip-card-back.card-gaon {
+.role-card.card-gaon {
   background: linear-gradient(145deg, #0d1b2a, #1a3a5c);
   border: 2px solid var(--color-gold);
   box-shadow: 0 0 24px rgba(255, 215, 0, 0.2);
@@ -403,17 +400,20 @@ button, input { font-family: inherit; -webkit-tap-highlight-color: transparent; 
 }
 .card-daku .role-team-badge { background: rgba(192, 57, 43, 0.35); color: #EC7063; }
 .card-gaon .role-team-badge { background: rgba(255, 215, 0, 0.15); color: var(--color-gold); }
-
 .role-flavour { font-size: 0.8rem; text-align: center; line-height: 1.5; color: rgba(245,245,245,0.7); font-style: italic; }
 
-.role-memorise { font-size: 0.8rem; color: var(--color-text-muted); text-align: center; transition: opacity 0.4s; }
-
-/* Combined role+word section — revealed simultaneously with the card flip, no animation */
-.rr-word-section {
-  width: 100%; max-width: 320px;
-  margin-top: 16px;
-}
+/* ── Word section (below role card, no animation) ── */
+.rr-word-section { width: 100%; max-width: 320px; }
 .rr-word-section.hidden { display: none; }
+
+/* ── Done button: sticky to bottom of the scroll container ── */
+.rr-done-wrap {
+  width: 100%; max-width: 320px;
+  position: sticky; bottom: 0;
+  padding: 12px 0 calc(var(--safe-b) + 12px);
+  background: linear-gradient(to bottom, transparent 0%, var(--color-bg) 30%);
+  margin-top: auto;
+}
 
 /* ── Word Reveal screens ── */
 .word-reveal-screen {

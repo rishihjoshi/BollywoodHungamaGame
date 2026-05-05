@@ -178,32 +178,24 @@
     </div>
 
     <!-- Revealed card view (hidden until tap) -->
-    <div id="rr-card-view" class="privacy-gate hidden">
-      <p class="privacy-pass-label" style="margin-bottom:2px">Your role,</p>
-      <p class="privacy-name" id="rr-card-name" style="margin-bottom:12px"></p>
+    <div id="rr-card-view" class="rr-reveal-view hidden">
+      <p class="privacy-pass-label">Your role,</p>
+      <p class="privacy-name" id="rr-card-name"></p>
 
-      <div class="flip-card flipped" id="rr-flip-card" style="max-width:320px">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-icon">🎬</div>
-            <div class="tap-hint">Tap to reveal</div>
-          </div>
-          <div class="flip-card-back" id="rr-card-back">
-            <div class="role-team-badge" id="rr-team-badge"></div>
-            <div class="role-char-name" id="rr-char-name"></div>
-            <div class="role-flavour" id="rr-flavour"></div>
-          </div>
-        </div>
+      <!-- Role card: simple visible card with scale-bounce animation (no 3D flip) -->
+      <div class="role-card" id="rr-role-card">
+        <div class="role-team-badge" id="rr-team-badge"></div>
+        <div class="role-char-name" id="rr-char-name"></div>
+        <div class="role-flavour" id="rr-flavour"></div>
       </div>
 
-      <p class="role-memorise" id="rr-memorise-hint">Memorise your role and word, then pass the phone</p>
-
-      <!-- Word info revealed below the card after the flip settles -->
+      <!-- Word section: visible immediately alongside role card -->
       <div id="rr-word-section" class="rr-word-section hidden">
         <div id="rr-word-content"></div>
       </div>
 
-      <div style="width:100%;max-width:320px;margin-top:8px">
+      <!-- Done button: sticky to bottom, always visible -->
+      <div class="rr-done-wrap">
         <button class="btn btn-primary" id="btn-rr-done">Done — Pass Phone</button>
       </div>
     </div>

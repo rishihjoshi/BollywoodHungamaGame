@@ -323,17 +323,16 @@ function showRoleCard(idx) {
 
   document.getElementById('rr-card-name').textContent = player.name;
 
-  const back = document.getElementById('rr-card-back');
-  back.className = `flip-card-back ${isDaku ? 'card-daku' : 'card-gaon'}`;
+  // Set role card style (DAKU = dark red, GAON = navy/gold)
+  // Re-trigger the scale-bounce animation by cloning the element in place
+  const roleCard = document.getElementById('rr-role-card');
+  const freshCard = roleCard.cloneNode(false); // shallow clone removes old animation state
+  freshCard.className = `role-card ${isDaku ? 'card-daku' : 'card-gaon'}`;
+  roleCard.replaceWith(freshCard);
 
   document.getElementById('rr-team-badge').textContent  = char.team;
   document.getElementById('rr-char-name').innerHTML     = `${char.emoji} ${escHtml(char.name)}`;
   document.getElementById('rr-flavour').textContent     = char.flavour;
-
-  // Trigger flip (remove, then re-add flipped after one frame)
-  const card = document.getElementById('rr-flip-card');
-  card.classList.remove('flipped');
-  requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('flipped')));
 
   // Populate word content for below the card
   const wordSection = document.getElementById('rr-word-section');
