@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./pabh.css">
   <title>Bollywood Games</title>
 </head>
 <body>
@@ -72,14 +73,17 @@
         </div>
       </div>
 
-      <!-- Placeholder: Coming Soon -->
-      <div class="game-hub-card game-card-soon">
+      <!-- Game 2: Picture Abhi Baaki Hai -->
+      <div class="game-hub-card game-card-active">
         <div class="game-card-top">
-          <div class="game-card-icon game-card-icon-dim">🎵</div>
+          <div class="game-card-icon">🎬</div>
           <div class="game-card-info">
-            <h2 class="game-card-name game-card-name-dim">More Games</h2>
-            <p class="game-card-desc">More Bollywood party games coming soon!</p>
+            <h2 class="game-card-name">Picture Abhi Baaki Hai</h2>
+            <p class="game-card-desc">Pitch a Bollywood blockbuster from a random combo. Group votes for the best idea. Lights, camera, drama!</p>
           </div>
+        </div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary" id="btn-pabh-start">🎬 Play</button>
         </div>
       </div>
 
@@ -131,29 +135,31 @@
       <h2 class="screen-title" style="margin:0">How to Play</h2>
     </div>
     <div class="rules-content">
-      <h3>The Setup</h3>
-      <p>Enter 3–12 player names. The app secretly assigns everyone a Sholay character. <strong>1–3 players are Daku</strong> (villains), the rest are <strong>Gaon</strong> (heroes). Nobody knows who else is Daku!</p>
+      <h3>🎬 The Setup</h3>
+      <p>Enter 3–12 player names. The app secretly assigns everyone a Sholay character. <strong>1–3 players become Daku</strong> (villains like Gabbar), the rest are <strong>Gaon</strong> (heroes). Nobody knows who else is what!</p>
 
-      <h3>Role Reveals</h3>
-      <p>Pass the phone around. Each player taps to reveal their secret character — then memorises it and passes the phone. <strong>Don't show your screen to anyone.</strong></p>
-
-      <h3>Word Reveals</h3>
-      <p>Pass around again. <strong>Gaon players</strong> see the full secret Bollywood word. <strong>Daku players</strong> only see the category — they must blend in and fake it!</p>
-
-      <h3>The Game (No App Needed)</h3>
+      <h3>📱 One Pass — Role + Word Together</h3>
+      <p>Pass the phone to each player <strong>one at a time</strong>. Each player taps <em>"Reveal Role &amp; Word"</em> to see <strong>both their character and the secret word on the same screen</strong>.</p>
       <ul>
-        <li>Each player says <strong>one word</strong> as a clue.</li>
-        <li>Daku tries to fake a plausible clue without knowing the word.</li>
+        <li><strong>Gaon players</strong> see their Sholay character <em>and</em> the full secret Bollywood word.</li>
+        <li><strong>Daku players</strong> see their character <em>and</em> only the word's category — they must bluff!</li>
+      </ul>
+      <p>Memorise it, tap <em>"Done — Pass Phone"</em>, and hand it to the next person. <strong>Don't show your screen to anyone.</strong></p>
+
+      <h3>🗣️ The Game (No App Needed)</h3>
+      <ul>
+        <li>Each player says <strong>one word</strong> as a clue related to the secret word.</li>
+        <li>Daku must give a convincing clue without knowing the actual word.</li>
         <li>Discuss as a group, then vote on who the Daku is.</li>
       </ul>
 
-      <h3>Scoring</h3>
+      <h3>🏆 Scoring</h3>
       <ul>
         <li><strong>Gaon wins</strong> if all Dakus are correctly identified.</li>
-        <li><strong>Daku wins</strong> if even one Daku survives the vote.</li>
+        <li><strong>Daku wins</strong> if even one Daku escapes the vote.</li>
       </ul>
 
-      <h3>Daku Count</h3>
+      <h3>💀 Daku Count</h3>
       <ul>
         <li>3–5 players → 1 Daku (Gabbar)</li>
         <li>6–8 players → 2 Dakus (Gabbar + Sambha)</li>
@@ -335,8 +341,118 @@
     </div>
   </div>
 
+
+  <!-- ====================================================
+       SCREEN: PABH — Setup
+       ==================================================== -->
+  <div data-screen="pabh-setup" class="screen">
+    <div class="screen-inner">
+      <h1 class="screen-title">Picture Abhi Baaki Hai</h1>
+      <p class="screen-subtitle">Add players, pick rounds, set your timer</p>
+
+      <div id="pabh-player-list" class="player-list"></div>
+      <button class="btn btn-ghost btn-sm" id="pabh-btn-add-player" style="margin-bottom:20px">+ Add Player</button>
+
+      <div class="pabh-section-label">Rounds</div>
+      <div class="pabh-option-group" id="pabh-round-selector">
+        <button class="pabh-option-btn" data-value="3">3</button>
+        <button class="pabh-option-btn selected" data-value="5">5</button>
+        <button class="pabh-option-btn" data-value="7">7</button>
+      </div>
+
+      <div class="pabh-section-label">Pitch Timer</div>
+      <div class="pabh-option-group" id="pabh-timer-selector">
+        <button class="pabh-option-btn" data-value="60">60s</button>
+        <button class="pabh-option-btn selected" data-value="90">90s</button>
+        <button class="pabh-option-btn" data-value="120">120s</button>
+      </div>
+      <p id="pabh-timer-preview" class="pabh-timer-preview"></p>
+
+      <div class="mt-auto">
+        <button class="btn btn-primary" id="pabh-btn-start" disabled>Start Game</button>
+        <button class="btn btn-ghost" id="pabh-btn-back-home" style="margin-top:10px">← Back to Hub</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: PABH — Combo Reveal
+       ==================================================== -->
+  <div data-screen="pabh-combo" class="screen">
+    <div class="screen-inner pabh-combo-inner">
+      <p class="pabh-pitcher-label">Now Pitching</p>
+      <h2 class="pabh-pitcher-name" id="pabh-pitcher-name"></h2>
+      <div class="pabh-cards-grid" id="pabh-cards-grid"></div>
+      <button class="btn btn-primary" id="pabh-btn-start-pitch" style="width:100%;margin-top:auto">Start Pitching →</button>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: PABH — Timer
+       ==================================================== -->
+  <div data-screen="pabh-timer" class="screen">
+    <div class="screen-inner pabh-timer-inner">
+      <div class="pabh-combo-compact" id="pabh-combo-compact"></div>
+      <div class="pabh-timer-wrap">
+        <svg class="pabh-timer-svg" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="pabh-timer-bg"   cx="60" cy="60" r="54"/>
+          <circle class="pabh-timer-ring" cx="60" cy="60" r="54" id="pabh-timer-ring"/>
+        </svg>
+        <div class="pabh-timer-text">
+          <span class="pabh-timer-number" id="pabh-timer-seconds">90</span>
+          <span class="pabh-timer-label">seconds</span>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="pabh-btn-timesup" style="width:100%;margin-top:auto">Time's Up — Go to Vote</button>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: PABH — Vote
+       ==================================================== -->
+  <div data-screen="pabh-vote" class="screen">
+    <div class="screen-inner">
+      <p class="pabh-vote-round-label" id="pabh-vote-round-label"></p>
+      <h2 class="pabh-vote-category" id="pabh-vote-category"></h2>
+      <p class="pabh-vote-progress" id="pabh-vote-progress">0 of 0 voted</p>
+      <div class="pabh-vote-grid" id="pabh-vote-grid"></div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: PABH — Round Result
+       ==================================================== -->
+  <div data-screen="pabh-round-result" class="screen">
+    <div class="screen-inner">
+      <p class="pabh-section-label">Round <span id="pabh-result-round-num"></span> Result</p>
+      <div class="pabh-winner-banner" id="pabh-winner-banner"></div>
+      <h3 class="pabh-standings-title">Standings</h3>
+      <div class="pabh-standings" id="pabh-standings"></div>
+      <div class="mt-auto">
+        <button class="btn btn-primary" id="pabh-btn-next-round">Next Round →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       SCREEN: PABH — Final
+       ==================================================== -->
+  <div data-screen="pabh-final" class="screen">
+    <div class="screen-inner">
+      <div class="pabh-final-winner" id="pabh-final-winner"></div>
+      <p class="pabh-final-subtitle" id="pabh-final-subtitle"></p>
+      <h3 class="pabh-standings-title">Final Scores</h3>
+      <div class="pabh-standings" id="pabh-final-standings"></div>
+      <div class="mt-auto">
+        <button class="btn btn-primary" id="pabh-btn-play-again">Play Again</button>
+        <button class="btn btn-ghost"   id="pabh-btn-back-hungama" style="margin-top:10px">Back to Hungama</button>
+      </div>
+    </div>
+  </div>
+
 </div><!-- #app -->
 
 <script src="./app.js"></script>
+<script src="./pabh.js"></script>
 </body>
 </html>

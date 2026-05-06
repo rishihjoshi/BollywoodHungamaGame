@@ -1,12 +1,15 @@
-const CACHE_NAME = 'bollywood-hungama-v4';
+const CACHE_NAME = 'bollywood-hungama-v5';
 
 const STATIC_ASSETS = [
   './',
   './index.html',
   './styles.css',
   './app.js',
+  './pabh.js',
+  './pabh.css',
   './manifest.json',
   './data/words.json',
+  './data/pabh-data.json',
   './icons/icon.svg',
   './icons/icon-maskable.svg',
   './icons/icon-192.png',

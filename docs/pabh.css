@@ -1,0 +1,501 @@
+/* ============================================================
+   Picture Abhi Baaki Hai — PABH-specific styles
+   Depends on CSS custom properties defined in styles.css
+   ============================================================ */
+
+/* ── Setup Screen ─────────────────────────────────────────── */
+
+.pabh-section-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin: 20px 0 8px;
+}
+
+.pabh-option-group {
+  display: flex;
+  gap: 8px;
+}
+
+.pabh-option-btn {
+  flex: 1;
+  min-height: 48px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--t-fast), background var(--t-fast), color var(--t-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pabh-option-btn.selected {
+  border-color: var(--color-gold);
+  background: rgba(255, 215, 0, 0.12);
+  color: var(--color-gold);
+}
+
+.pabh-option-btn:active {
+  transform: scale(0.97);
+}
+
+.pabh-timer-preview {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 6px 0 0;
+  min-height: 1.2em;
+}
+
+.pabh-timer-preview .badge-recommended {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--color-gold);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 20px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ── Combo Screen ─────────────────────────────────────────── */
+
+.pabh-combo-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.pabh-pitcher-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  margin: 0 0 4px;
+}
+
+.pabh-pitcher-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 6vw, 2.25rem);
+  font-weight: 900;
+  color: var(--color-gold);
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+.pabh-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.pabh-combo-card {
+  background: var(--color-navy);
+  border: 1.5px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 14px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transform: scale(0.8) rotateY(-90deg);
+  /* transition applied only when .revealed is added */
+}
+
+.pabh-combo-card.revealed {
+  opacity: 1;
+  transform: scale(1) rotateY(0deg);
+  transition: opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pabh-combo-card.wildcard {
+  border-color: transparent;
+  box-shadow: 0 0 0 1.5px #FF4500, 0 0 12px rgba(255, 69, 0, 0.35),
+              inset 0 0 0 1px rgba(255, 215, 0, 0.1);
+  background: linear-gradient(160deg, #1a0a00 0%, var(--color-navy) 100%);
+}
+
+.pabh-card-category {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.pabh-combo-card.wildcard .pabh-card-category {
+  color: #FF8C00;
+}
+
+.pabh-card-emoji {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.pabh-card-value {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 3.5vw, 1.05rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.pabh-combo-card.wildcard .pabh-card-value {
+  color: #FFD700;
+  font-style: italic;
+}
+
+/* ── Timer Screen ─────────────────────────────────────────── */
+
+.pabh-timer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Compact combo strip on timer screen */
+.pabh-combo-compact {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pabh-combo-compact::-webkit-scrollbar { display: none; }
+
+.pabh-compact-chip {
+  flex: 1;
+  min-width: 0;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.pabh-compact-chip.wildcard {
+  border-color: #FF4500;
+  background: rgba(255, 69, 0, 0.08);
+}
+
+.pabh-compact-label {
+  display: block;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.pabh-compact-value {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* SVG timer */
+.pabh-timer-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 28px;
+}
+
+.pabh-timer-svg {
+  width: 200px;
+  height: 200px;
+  transform: rotate(-90deg);
+}
+
+.pabh-timer-bg {
+  fill: none;
+  stroke: var(--color-surface-3);
+  stroke-width: 10;
+}
+
+.pabh-timer-ring {
+  fill: none;
+  stroke: var(--color-gold);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 339.3 339.3;
+  stroke-dashoffset: 0;
+  transition: stroke var(--t-fast);
+}
+
+.pabh-timer-ring.timer-orange { stroke: #FF8C00; }
+.pabh-timer-ring.timer-red    { stroke: var(--color-red); }
+
+@keyframes pabhPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.05); }
+}
+
+.pabh-timer-wrap.pulsing {
+  animation: pabhPulse 0.8s ease-in-out infinite;
+}
+
+.pabh-timer-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.pabh-timer-number {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.pabh-timer-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+/* ── Vote Screen ──────────────────────────────────────────── */
+
+.pabh-vote-round-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin: 0 0 4px;
+}
+
+.pabh-vote-category {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--color-gold);
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.pabh-vote-progress {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0 0 16px;
+}
+
+.pabh-vote-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.pabh-vote-card {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: var(--color-surface-2);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  transition: border-color var(--t-fast), background var(--t-fast);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.pabh-vote-card:active {
+  transform: scale(0.98);
+}
+
+.pabh-vote-card.voted {
+  border-color: var(--color-gold);
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--color-gold);
+  cursor: default;
+}
+
+.pabh-vote-checkmark {
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity var(--t-fast);
+}
+
+.pabh-vote-card.voted .pabh-vote-checkmark {
+  opacity: 1;
+}
+
+/* ── Round Result Screen ──────────────────────────────────── */
+
+.pabh-winner-banner {
+  background: linear-gradient(135deg, #1a1200, #0d1b2a);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+.pabh-winner-trophy {
+  font-size: 2.5rem;
+  margin-bottom: 4px;
+}
+
+.pabh-winner-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  font-weight: 900;
+  color: var(--color-gold);
+  margin: 0 0 4px;
+}
+
+.pabh-winner-votes {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.pabh-standings-title {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin: 0 0 10px;
+}
+
+.pabh-standings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.pabh-score-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+}
+
+.pabh-score-row.leader {
+  background: #1a1200;
+  border: 1px solid var(--color-gold);
+}
+
+.pabh-score-rank {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  min-width: 24px;
+  text-align: center;
+}
+
+.pabh-score-rank.first  { color: var(--color-gold); }
+.pabh-score-rank.second { color: #C0C0C0; }
+.pabh-score-rank.third  { color: #CD7F32; }
+.pabh-score-rank.other  { color: var(--color-text-muted); }
+
+.pabh-score-name {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pabh-score-pts {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+/* ── Final Screen ─────────────────────────────────────────── */
+
+.pabh-final-winner {
+  background: linear-gradient(160deg, #1a1200, #0d0d1a);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  margin-bottom: 10px;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.pabh-final-trophy {
+  font-size: 3.5rem;
+  margin-bottom: 8px;
+}
+
+.pabh-final-winner-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 7vw, 2.5rem);
+  font-weight: 900;
+  color: var(--color-gold);
+  margin: 0 0 4px;
+}
+
+.pabh-final-winner-score {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.pabh-final-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 0 0 20px;
+  padding: 0 8px;
+  line-height: 1.4;
+}
