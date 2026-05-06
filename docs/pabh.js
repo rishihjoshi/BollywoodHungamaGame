@@ -34,12 +34,6 @@ const FINAL_SUBTITLES = [
   'OTT rights already acquired.',
 ];
 
-const WILDCARD_TYPE_LABELS = {
-  twist:    '⚡ WILDCARD',
-  dialogue: '⚡ WILDCARD',
-  decade:   '⚡ WILDCARD',
-  costar:   '⚡ WILDCARD',
-};
 
 // ── Module State ─────────────────────────────────────────────
 
@@ -132,6 +126,7 @@ async function loadPabhData() {
 // ── Combo Generation ─────────────────────────────────────────
 
 function generateCombo() {
+  if (!PABH_DATA) { console.error('PABH: data not loaded'); return; }
   const actorResult    = pickWithoutReplacement(PABH_DATA.actors,    PS.usedActors);
   const locationResult = pickWithoutReplacement(PABH_DATA.locations, PS.usedLocations);
   const genreResult    = pickWithoutReplacement(PABH_DATA.genres,    PS.usedGenres);
@@ -289,10 +284,8 @@ function updateTimerDisplay(secondsLeft, total) {
   numEl.textContent = secondsLeft;
 
   const circumference = 2 * Math.PI * 54; // ≈ 339.3
-  const fraction = total > 0 ? secondsLeft / total : 0;
-  ring.style.strokeDashoffset = circumference * (1 - fraction);
-
   const pctRemaining = total > 0 ? secondsLeft / total : 0;
+  ring.style.strokeDashoffset = circumference * (1 - pctRemaining);
 
   ring.classList.remove('timer-orange', 'timer-red');
   wrap.classList.remove('pulsing');
@@ -587,6 +580,10 @@ function advanceToNextRound() {
 // ── Start Game ────────────────────────────────────────────────
 
 function startPabhGame() {
+  if (!PABH_DATA) {
+    alert('Game data not loaded. Please check your connection and refresh.');
+    return;
+  }
   const names = PS.players.map(p => p.name.trim()).filter(Boolean);
   if (names.length < PABH_MIN_PLAYERS) return;
 
