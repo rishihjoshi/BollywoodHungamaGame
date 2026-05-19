@@ -147,11 +147,12 @@ test.describe('PABH Game Flow', () => {
     expect(parseInt(text)).toBeGreaterThan(0);
   });
 
-  test('compact combo chips visible on timer screen', async ({ page }) => {
+  test('timer screen shows 4 full-size combo cards (no compact chips)', async ({ page }) => {
     await fillPlayersAndStart(page);
     await page.waitForTimeout(1200);
     await page.click('#pabh-btn-start-pitch');
-    await expect(page.locator('.pabh-compact-chip')).toHaveCount(4);
+    await expect(page.locator('#pabh-timer-cards-grid .pabh-combo-card.revealed')).toHaveCount(4);
+    await expect(page.locator('.pabh-compact-chip')).toHaveCount(0);
   });
 
   test("Time's Up navigates to vote screen", async ({ page }) => {
@@ -183,11 +184,16 @@ test.describe('PABH Game Flow', () => {
     await page.waitForTimeout(1200);
     await page.click('#pabh-btn-start-pitch');
     await page.click('#pabh-btn-timesup');
-    // 2 voters for 3 players — click both vote cards
     const cards = page.locator('.pabh-vote-card');
+    // Lock In button starts disabled
+    await expect(page.locator('#pabh-btn-lock-votes')).toBeDisabled();
+    // Cast both votes
     await cards.nth(0).click();
     await cards.nth(1).click();
-    await page.waitForTimeout(800); // auto-advance delay
+    // Lock In button now enabled
+    await expect(page.locator('#pabh-btn-lock-votes')).toBeEnabled();
+    // Host locks in votes
+    await page.click('#pabh-btn-lock-votes');
     await expect(page.locator('[data-screen="pabh-round-result"]')).toHaveClass(/screen-active/);
   });
 
@@ -199,7 +205,7 @@ test.describe('PABH Game Flow', () => {
     const cards = page.locator('.pabh-vote-card');
     await cards.nth(0).click();
     await cards.nth(1).click();
-    await page.waitForTimeout(800);
+    await page.click('#pabh-btn-lock-votes');
     await expect(page.locator('#pabh-winner-banner')).toBeVisible();
     await expect(page.locator('#pabh-standings .pabh-score-row')).toHaveCount(3);
   });
@@ -216,5 +222,160 @@ test.describe('KHG game unaffected', () => {
     await page.goto('/');
     await page.click('#btn-home-rules');
     await expect(page.locator('[data-screen="screen-rules"]')).toHaveClass(/screen-active/);
+  });
+});
+
+test.describe('PABH New Features', () => {
+  async function fillPlayersAndStart(page, names = ['Alice', 'Bob', 'Charlie']) {
+    await page.goto('/');
+    await page.click('#btn-pabh-start');
+    const inputs = page.locator('#pabh-player-list input');
+    for (let i = 0; i < names.length; i++) {
+      await inputs.nth(i).fill(names[i]);
+    }
+    await page.click('#pabh-btn-start');
+  }
+
+  // --- Timer Screen Cards ---
+
+  test('timer screen shows 4 full-size combo cards', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    await expect(page.locator('#pabh-timer-cards-grid .pabh-combo-card.revealed')).toHaveCount(4);
+    await expect(page.locator('#pabh-combo-compact')).toHaveCount(0);
+  });
+
+  test('timer screen has NO compact chip elements', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    await expect(page.locator('.pabh-compact-chip')).toHaveCount(0);
+  });
+
+  // --- Vote Screen Lock-In Button ---
+
+  test('Lock In Votes button is present and starts disabled', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    await page.click('#pabh-btn-timesup');
+    await expect(page.locator('#pabh-btn-lock-votes')).toBeVisible();
+    await expect(page.locator('#pabh-btn-lock-votes')).toBeDisabled();
+  });
+
+  test('Lock In Votes enables only after all N-1 votes cast', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    await page.click('#pabh-btn-timesup');
+    const cards = page.locator('.pabh-vote-card');
+    // After 1 of 2 votes — still disabled
+    await cards.nth(0).click();
+    await expect(page.locator('#pabh-btn-lock-votes')).toBeDisabled();
+    // After 2 of 2 votes — enabled
+    await cards.nth(1).click();
+    await expect(page.locator('#pabh-btn-lock-votes')).toBeEnabled();
+  });
+
+  test('game does NOT auto-advance after all votes without lock-in', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    await page.click('#pabh-btn-timesup');
+    const cards = page.locator('.pabh-vote-card');
+    await cards.nth(0).click();
+    await cards.nth(1).click();
+    // Wait longer than the old 600ms auto-advance delay
+    await page.waitForTimeout(1000);
+    // Must still be on vote screen
+    await expect(page.locator('[data-screen="pabh-vote"]')).toHaveClass(/screen-active/);
+  });
+
+  // --- Abandon / Cancel Buttons ---
+
+  test('cancel button visible on pabh-setup screen', async ({ page }) => {
+    await page.goto('/');
+    await page.click('#btn-pabh-start');
+    await expect(page.locator('#pabh-cancel-setup')).toBeVisible();
+  });
+
+  test('cancel button visible on pabh-combo screen', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await expect(page.locator('#pabh-cancel-combo')).toBeVisible();
+  });
+
+  test('cancel button visible on pabh-timer screen', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    await expect(page.locator('#pabh-cancel-timer')).toBeVisible();
+  });
+
+  test('cancel on timer screen opens abandon modal', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    await page.click('#pabh-cancel-timer');
+    await expect(page.locator('#abandon-modal')).not.toHaveClass(/hidden/);
+  });
+
+  test('abandon confirm from timer returns to home and clears session', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    await page.click('#pabh-cancel-timer');
+    await page.click('#btn-abandon-confirm');
+    await expect(page.locator('[data-screen="screen-home"]')).toHaveClass(/screen-active/);
+    const session = await page.evaluate(() => sessionStorage.getItem('pabh-session'));
+    expect(session).toBeNull();
+  });
+
+  test('abandon cancel on timer resumes countdown', async ({ page }) => {
+    await fillPlayersAndStart(page, ['Alice', 'Bob', 'Charlie']);
+    await page.waitForTimeout(1200);
+    await page.click('#pabh-btn-start-pitch');
+    // Let the timer tick down at least once before pausing
+    await page.waitForTimeout(1500);
+    // Capture time before pause
+    const before = await page.locator('#pabh-timer-seconds').textContent();
+    await page.click('#pabh-cancel-timer');
+    await page.waitForTimeout(2000); // 2 seconds pass while modal is open
+    await page.click('#btn-abandon-cancel');
+    await page.waitForTimeout(1200); // wait for at least one timer tick (1s interval)
+    const after = await page.locator('#pabh-timer-seconds').textContent();
+    // Timer should have resumed — after value must be less than before value
+    expect(parseInt(after)).toBeLessThan(parseInt(before));
+    // Timer must still be visible and active
+    await expect(page.locator('[data-screen="pabh-timer"]')).toHaveClass(/screen-active/);
+  });
+
+  // --- How to Play ---
+
+  test('PABH hub card has How to Play button', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#btn-pabh-rules')).toBeVisible();
+  });
+
+  test('How to Play button navigates to pabh-rules screen', async ({ page }) => {
+    await page.goto('/');
+    await page.click('#btn-pabh-rules');
+    await expect(page.locator('[data-screen="pabh-rules"]')).toHaveClass(/screen-active/);
+  });
+
+  test('pabh-rules screen contains key sections', async ({ page }) => {
+    await page.goto('/');
+    await page.click('#btn-pabh-rules');
+    await expect(page.locator('[data-screen="pabh-rules"] .rules-content')).toContainText('Pitcher');
+    await expect(page.locator('[data-screen="pabh-rules"] .rules-content')).toContainText('Wildcard');
+    await expect(page.locator('[data-screen="pabh-rules"] .rules-content')).toContainText('Lock In Votes');
+  });
+
+  test('back button on pabh-rules returns to home hub', async ({ page }) => {
+    await page.goto('/');
+    await page.click('#btn-pabh-rules');
+    await page.click('#btn-pabh-rules-back');
+    await expect(page.locator('[data-screen="screen-home"]')).toHaveClass(/screen-active/);
   });
 });

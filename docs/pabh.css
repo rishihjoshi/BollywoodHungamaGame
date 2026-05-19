@@ -222,14 +222,14 @@
 /* SVG timer */
 .pabh-timer-wrap {
   position: relative;
-  width: 200px;
-  height: 200px;
-  margin-bottom: 28px;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 16px;
 }
 
 .pabh-timer-svg {
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   transform: rotate(-90deg);
 }
 
@@ -244,7 +244,7 @@
   stroke: var(--color-gold);
   stroke-width: 10;
   stroke-linecap: round;
-  stroke-dasharray: 339.3 339.3;
+  stroke-dasharray: 289.0 289.0;
   stroke-dashoffset: 0;
   transition: stroke var(--t-fast);
 }

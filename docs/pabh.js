@@ -42,6 +42,9 @@ let PABH_TIMER_ID = null;
 let PABH_TIMER_TOTAL = 90;
 let PABH_TIMER_LEFT = 90;
 
+// Flag: timer was paused when abandon modal opened from timer screen
+let pabhTimerWasPaused = false;
+
 const DEFAULT_PABH_STATE = {
   players: [],
   currentRound: 0,
@@ -251,20 +254,21 @@ function renderComboScreen() {
 // ── Timer Screen ─────────────────────────────────────────────
 
 function renderTimerScreen() {
-  // Build compact combo chips
-  const compact = document.getElementById('pabh-combo-compact');
-  if (compact && PS.currentCombo) {
-    const c = PS.currentCombo;
-    const chips = [
-      { label: 'ACTOR',    value: c.actor,           wc: false },
-      { label: 'LOCATION', value: c.location,        wc: false },
-      { label: 'GENRE',    value: c.genre,           wc: false },
-      { label: 'WILDCARD', value: c.wildcard.text,   wc: true  },
+  // Populate full-size combo cards immediately (no stagger)
+  const grid = document.getElementById('pabh-timer-cards-grid');
+  if (grid && PS.currentCombo) {
+    const combo = PS.currentCombo;
+    const cards = [
+      { emoji: '🎬', category: 'ACTOR',    value: combo.actor,           wildcard: false },
+      { emoji: '📍', category: 'LOCATION', value: combo.location,        wildcard: false },
+      { emoji: '🎭', category: 'GENRE',    value: combo.genre,           wildcard: false },
+      { emoji: '⚡', category: 'WILDCARD', value: combo.wildcard.text,   wildcard: true  },
     ];
-    compact.innerHTML = chips.map(ch => `
-      <div class="pabh-compact-chip${ch.wc ? ' wildcard' : ''}">
-        <span class="pabh-compact-label">${pabhEscHtml(ch.label)}</span>
-        <span class="pabh-compact-value">${pabhEscHtml(ch.value)}</span>
+    grid.innerHTML = cards.map((c, i) => `
+      <div class="pabh-combo-card revealed${c.wildcard ? ' wildcard' : ''}" data-card="${i}">
+        <span class="pabh-card-category">${pabhEscHtml(c.category)}</span>
+        <span class="pabh-card-emoji">${c.emoji}</span>
+        <span class="pabh-card-value">${pabhEscHtml(c.value)}</span>
       </div>
     `).join('');
   }
@@ -283,7 +287,7 @@ function updateTimerDisplay(secondsLeft, total) {
 
   numEl.textContent = secondsLeft;
 
-  const circumference = 2 * Math.PI * 54; // ≈ 339.3
+  const circumference = 2 * Math.PI * 46; // ≈ 289.0
   const pctRemaining = total > 0 ? secondsLeft / total : 0;
   ring.style.strokeDashoffset = circumference * (1 - pctRemaining);
 
@@ -332,6 +336,10 @@ function renderVoteScreen() {
   PS.currentVoteCategory = cat.label;
   savePabhSession();
 
+  // Reset lock-in button
+  const lockBtn = document.getElementById('pabh-btn-lock-votes');
+  if (lockBtn) lockBtn.disabled = true;
+
   const roundLabelEl = document.getElementById('pabh-vote-round-label');
   const catEl        = document.getElementById('pabh-vote-category');
   const progressEl   = document.getElementById('pabh-vote-progress');
@@ -358,6 +366,11 @@ function renderVoteScreen() {
   }
 }
 
+// VOTE MECHANIC — Option B:
+// All N-1 non-pitcher players cast one vote each. Auto-advance is removed.
+// A "Lock In Votes →" button enables only when voteCount === eligible.length.
+// This preserves the group mechanic while giving the host explicit control
+// over when to proceed, reducing accidental advances on a shared device.
 function handleVoteClick(voterName, votedForName) {
   if (PS.votes[voterName]) return;
   PS.votes[voterName] = votedForName;
@@ -378,10 +391,8 @@ function handleVoteClick(voterName, votedForName) {
   if (progressEl) progressEl.textContent = `${voteCount} of ${eligible.length} voted`;
 
   if (voteCount >= eligible.length) {
-    setTimeout(() => {
-      renderRoundResult();
-      paabhGoTo('pabh-round-result');
-    }, 600);
+    const lockBtn = document.getElementById('pabh-btn-lock-votes');
+    if (lockBtn) lockBtn.disabled = false;
   }
 }
 
@@ -729,6 +740,12 @@ function bindPabhEvents() {
     handleVoteClick(nextVoter.name, votedFor);
   });
 
+  // Vote: lock in votes button (Option B — host explicitly advances)
+  document.getElementById('pabh-btn-lock-votes')?.addEventListener('click', () => {
+    renderRoundResult();
+    paabhGoTo('pabh-round-result');
+  });
+
   // Round result: next round
   document.getElementById('pabh-btn-next-round')?.addEventListener('click', advanceToNextRound);
 
@@ -738,6 +755,59 @@ function bindPabhEvents() {
   // Final: back to main menu
   document.getElementById('pabh-btn-back-hungama')?.addEventListener('click', () => {
     clearPabhTimer();
+    paabhGoTo('screen-home');
+  });
+
+  // ── Abandon / Cancel buttons ──────────────────────────────
+
+  const pabhAbandon = () => {
+    clearPabhTimer();
+    pabhTimerWasPaused = false;
+    sessionStorage.removeItem(PABH_SESSION_KEY);
+    PS = { ...DEFAULT_PABH_STATE };
+    paabhGoTo('screen-home');
+  };
+
+  // Non-timer screens: open abandon modal
+  ['pabh-cancel-setup', 'pabh-cancel-combo', 'pabh-cancel-vote', 'pabh-cancel-result'].forEach(id => {
+    document.getElementById(id)?.addEventListener('click', () => showAbandonModal(pabhAbandon));
+  });
+
+  // Timer screen: pause first, then open abandon modal
+  document.getElementById('pabh-cancel-timer')?.addEventListener('click', () => {
+    clearPabhTimer();
+    pabhTimerWasPaused = true;
+    showAbandonModal(() => {
+      pabhTimerWasPaused = false;
+      sessionStorage.removeItem(PABH_SESSION_KEY);
+      PS = { ...DEFAULT_PABH_STATE };
+      paabhGoTo('screen-home');
+    });
+  });
+
+  // "Stay" on abandon modal: resume timer if it was paused by timer-screen cancel.
+  // Registered here (before modal's own dynamic listener) so it fires first.
+  document.getElementById('btn-abandon-cancel')?.addEventListener('click', () => {
+    if (pabhTimerWasPaused && PABH_TIMER_LEFT > 0 && PABH_TIMER_ID === null) {
+      pabhTimerWasPaused = false;
+      PABH_TIMER_ID = setInterval(() => {
+        PABH_TIMER_LEFT--;
+        updateTimerDisplay(PABH_TIMER_LEFT, PABH_TIMER_TOTAL);
+        if (PABH_TIMER_LEFT <= 0) {
+          clearPabhTimer();
+          setTimeout(() => { renderVoteScreen(); paabhGoTo('pabh-vote'); }, 400);
+        }
+      }, 1000);
+    }
+  });
+
+  // ── How to Play ───────────────────────────────────────────
+
+  document.getElementById('btn-pabh-rules')?.addEventListener('click', () => {
+    paabhGoTo('pabh-rules');
+  });
+
+  document.getElementById('btn-pabh-rules-back')?.addEventListener('click', () => {
     paabhGoTo('screen-home');
   });
 }

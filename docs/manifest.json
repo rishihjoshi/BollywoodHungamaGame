@@ -1,7 +1,7 @@
 {
-  "name": "Bollywood Games",
-  "short_name": "BW Games",
-  "description": "Sholay-inspired Bollywood party games hub — Kaun hai Gabbar and more",
+  "name": "Bollywood Hungama",
+  "short_name": "BW Hungama",
+  "description": "Bollywood party games — Kaun Hai Gabbar & Picture Abhi Baaki Hai",
   "start_url": "./index.html",
   "display": "standalone",
   "display_override": ["standalone"],
@@ -12,26 +12,20 @@
   "categories": ["games", "entertainment"],
   "icons": [
     {
-      "src": "./icons/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./images/AppIcon.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icons/icon-maskable.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./images/AppIcon.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable"
     },
     {
       "src": "./icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/icon-512.png",
-      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     }

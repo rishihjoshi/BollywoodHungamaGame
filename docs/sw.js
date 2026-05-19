@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bollywood-hungama-v6';
+const CACHE_NAME = 'bollywood-hungama-v7';
 
 const STATIC_ASSETS = [
   './',
@@ -13,7 +13,11 @@ const STATIC_ASSETS = [
   './icons/icon.svg',
   './icons/icon-maskable.svg',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './images/AppIcon.png',
+  './images/AppHeroImage.png',
+  './images/KaunHaiGabbar_HeroImage.png',
+  './images/PictureAbhiBakiHai_HeroImage.png'
 ];
 
 self.addEventListener('install', event => {

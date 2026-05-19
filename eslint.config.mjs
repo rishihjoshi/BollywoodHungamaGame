@@ -9,6 +9,8 @@ export default [
       ecmaVersion: 2021,
       globals: {
         ...globals.browser,
+        showAbandonModal: "readonly",
+        goTo: "readonly",
       },
     },
     rules: {
