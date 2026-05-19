@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bollywood-hungama-v7';
+const CACHE_NAME = 'bollywood-hungama-v8';
 
 const STATIC_ASSETS = [
   './',
@@ -13,6 +13,7 @@ const STATIC_ASSETS = [
   './icons/icon.svg',
   './icons/icon-maskable.svg',
   './icons/icon-192.png',
+  './icons/icon-192-maskable.png',
   './icons/icon-512.png',
   './images/AppIcon.png',
   './images/AppHeroImage.png',

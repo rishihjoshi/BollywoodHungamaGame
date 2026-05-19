@@ -30,11 +30,16 @@ test.describe('Task 1 — Rebranding', () => {
     expect(failed).toHaveLength(0);
   });
 
-  test('manifest.json references AppIcon.png', async ({ page }) => {
+  test('manifest.json has correct 192 and 512 icons with maskable variants', async ({ page }) => {
     const res  = await page.goto('/manifest.json');
     const json = await res.json();
-    const srcs = json.icons.map(i => i.src);
-    expect(srcs.some(s => s.includes('AppIcon'))).toBe(true);
+    const icons = json.icons;
+    // Must have a 512x512 any icon
+    expect(icons.some(i => i.sizes === '512x512' && i.purpose === 'any')).toBe(true);
+    // Must have a 192x192 any icon
+    expect(icons.some(i => i.sizes === '192x192' && i.purpose === 'any')).toBe(true);
+    // Must have a 192x192 maskable icon (required for Android adaptive icons)
+    expect(icons.some(i => i.sizes === '192x192' && i.purpose === 'maskable')).toBe(true);
   });
 
   test('OG image meta tag points to AppHeroImage', async ({ page }) => {
