@@ -187,9 +187,9 @@ test.describe('PABH Game Flow', () => {
     const cards = page.locator('.pabh-vote-card');
     // Lock In button starts disabled
     await expect(page.locator('#pabh-btn-lock-votes')).toBeDisabled();
-    // Cast both votes
-    await cards.nth(0).click();
-    await cards.nth(1).click();
+    // Cast both votes: each voter clicks the OTHER player's card (self-card is dimmed)
+    await cards.nth(1).click(); // voter 1 → votes for player at nth(1)
+    await cards.nth(0).click(); // voter 2 → votes for player at nth(0)
     // Lock In button now enabled
     await expect(page.locator('#pabh-btn-lock-votes')).toBeEnabled();
     // Host locks in votes
@@ -203,8 +203,8 @@ test.describe('PABH Game Flow', () => {
     await page.click('#pabh-btn-start-pitch');
     await page.click('#pabh-btn-timesup');
     const cards = page.locator('.pabh-vote-card');
-    await cards.nth(0).click();
-    await cards.nth(1).click();
+    await cards.nth(1).click(); // voter 1 → votes for player at nth(1)
+    await cards.nth(0).click(); // voter 2 → votes for player at nth(0)
     await page.click('#pabh-btn-lock-votes');
     await expect(page.locator('#pabh-winner-banner')).toBeVisible();
     await expect(page.locator('#pabh-standings .pabh-score-row')).toHaveCount(3);
@@ -270,11 +270,11 @@ test.describe('PABH New Features', () => {
     await page.click('#pabh-btn-start-pitch');
     await page.click('#pabh-btn-timesup');
     const cards = page.locator('.pabh-vote-card');
-    // After 1 of 2 votes — still disabled
-    await cards.nth(0).click();
-    await expect(page.locator('#pabh-btn-lock-votes')).toBeDisabled();
-    // After 2 of 2 votes — enabled
+    // After 1 of 2 votes — still disabled (voter 1 clicks the OTHER card)
     await cards.nth(1).click();
+    await expect(page.locator('#pabh-btn-lock-votes')).toBeDisabled();
+    // After 2 of 2 votes — enabled (voter 2 clicks the OTHER card)
+    await cards.nth(0).click();
     await expect(page.locator('#pabh-btn-lock-votes')).toBeEnabled();
   });
 
@@ -284,8 +284,8 @@ test.describe('PABH New Features', () => {
     await page.click('#pabh-btn-start-pitch');
     await page.click('#pabh-btn-timesup');
     const cards = page.locator('.pabh-vote-card');
-    await cards.nth(0).click();
-    await cards.nth(1).click();
+    await cards.nth(1).click(); // voter 1 → votes for player at nth(1)
+    await cards.nth(0).click(); // voter 2 → votes for player at nth(0)
     // Wait longer than the old 600ms auto-advance delay
     await page.waitForTimeout(1000);
     // Must still be on vote screen

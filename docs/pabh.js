@@ -45,6 +45,9 @@ let PABH_TIMER_LEFT = 90;
 // Flag: timer was paused when abandon modal opened from timer screen
 let pabhTimerWasPaused = false;
 
+// Flag: prevents double-render of vote screen when timer expires AND user taps Time's Up simultaneously
+let pabhVoteScreenRendered = false;
+
 const DEFAULT_PABH_STATE = {
   players: [],
   currentRound: 0,
@@ -313,10 +316,13 @@ function startPabhTimer() {
     updateTimerDisplay(PABH_TIMER_LEFT, PABH_TIMER_TOTAL);
     if (PABH_TIMER_LEFT <= 0) {
       clearPabhTimer();
-      setTimeout(() => {
-        renderVoteScreen();
-        paabhGoTo('pabh-vote');
-      }, 400);
+      if (!pabhVoteScreenRendered) {
+        pabhVoteScreenRendered = true;
+        setTimeout(() => {
+          renderVoteScreen();
+          paabhGoTo('pabh-vote');
+        }, 400);
+      }
     }
   }, 1000);
 }
@@ -332,6 +338,7 @@ function clearPabhTimer() {
 
 function renderVoteScreen() {
   PS.votes = {};
+  pabhVoteScreenRendered = false; // reset race-condition guard for next use
   const cat = getVoteCategory(PS.currentRound);
   PS.currentVoteCategory = cat.label;
   savePabhSession();
@@ -343,6 +350,8 @@ function renderVoteScreen() {
   const roundLabelEl = document.getElementById('pabh-vote-round-label');
   const catEl        = document.getElementById('pabh-vote-category');
   const progressEl   = document.getElementById('pabh-vote-progress');
+  const promptEl     = document.getElementById('pabh-vote-prompt');
+  const skipBtn      = document.getElementById('pabh-btn-skip-voter');
   const grid         = document.getElementById('pabh-vote-grid');
 
   if (roundLabelEl) roundLabelEl.textContent = `Round ${PS.currentRound}`;
@@ -352,6 +361,8 @@ function renderVoteScreen() {
   const eligible = PS.players.filter(p => p.name !== pitcher);
 
   if (progressEl) progressEl.textContent = `0 of ${eligible.length} voted`;
+  if (promptEl && eligible.length > 0) promptEl.textContent = `📱 Pass to ${eligible[0].name} to vote`;
+  if (skipBtn) skipBtn.style.display = 'inline';
 
   if (grid) {
     grid.innerHTML = PS.players.map(p => {
@@ -363,6 +374,19 @@ function renderVoteScreen() {
         </div>
       `;
     }).join('');
+
+    // Dim first voter's own card so they can't vote for themselves
+    _updateSelfCard(grid, eligible);
+  }
+}
+
+// Highlights the current voter's own card as un-selectable
+function _updateSelfCard(grid, eligible) {
+  const nextVoter = eligible.find(p => !PS.votes[p.name]);
+  grid.querySelectorAll('.pabh-vote-card').forEach(c => c.classList.remove('self-card'));
+  if (nextVoter) {
+    const selfCard = grid.querySelector(`[data-player="${CSS.escape(nextVoter.name)}"]`);
+    if (selfCard) selfCard.classList.add('self-card');
   }
 }
 
@@ -376,9 +400,9 @@ function handleVoteClick(voterName, votedForName) {
   PS.votes[voterName] = votedForName;
   savePabhSession();
 
-  // Update voted card UI
+  // Update voted card UI (only for real votes, not abstentions)
   const grid = document.getElementById('pabh-vote-grid');
-  if (grid) {
+  if (grid && votedForName !== '__abstain__') {
     const card = grid.querySelector(`[data-player="${CSS.escape(votedForName)}"]`);
     if (card) card.classList.add('voted');
   }
@@ -390,9 +414,21 @@ function handleVoteClick(voterName, votedForName) {
   const progressEl = document.getElementById('pabh-vote-progress');
   if (progressEl) progressEl.textContent = `${voteCount} of ${eligible.length} voted`;
 
+  // Update "whose turn" prompt and self-card dim for next voter
+  const nextVoter = eligible.find(p => !PS.votes[p.name]);
+  const promptEl  = document.getElementById('pabh-vote-prompt');
+  if (promptEl) {
+    promptEl.textContent = nextVoter
+      ? `📱 Pass to ${nextVoter.name} to vote`
+      : `✅ All votes in — host tap Lock In Votes`;
+  }
+  if (grid) _updateSelfCard(grid, eligible);
+
   if (voteCount >= eligible.length) {
     const lockBtn = document.getElementById('pabh-btn-lock-votes');
     if (lockBtn) lockBtn.disabled = false;
+    const skipBtn = document.getElementById('pabh-btn-skip-voter');
+    if (skipBtn) skipBtn.style.display = 'none';
   }
 }
 
@@ -403,6 +439,7 @@ function renderRoundResult() {
   const tally = {};
   PS.players.forEach(p => { tally[p.name] = 0; });
   Object.values(PS.votes).forEach(name => {
+    if (name === '__abstain__') return; // skip abstentions
     if (tally[name] !== undefined) tally[name]++;
   });
 
@@ -463,16 +500,30 @@ function renderRoundResult() {
 // ── Final Screen ──────────────────────────────────────────────
 
 function renderFinalScreen() {
-  const sorted  = [...PS.players].sort((a, b) => (b.score || 0) - (a.score || 0));
-  const champion = sorted[0];
+  // Sort by score DESC, then by roundsWon DESC as tiebreaker
+  const sorted = [...PS.players].sort((a, b) =>
+    (b.score || 0) - (a.score || 0) || (b.roundsWon || 0) - (a.roundsWon || 0)
+  );
+  const topScore    = sorted[0]?.score || 0;
+  const champions   = sorted.filter(p => (p.score || 0) === topScore);
+  const isFinalTie  = champions.length > 1;
+  const champion    = sorted[0];
 
   const winnerEl = document.getElementById('pabh-final-winner');
   if (winnerEl && champion) {
-    winnerEl.innerHTML = `
-      <div class="pabh-final-trophy">🎬</div>
-      <p class="pabh-final-winner-name">${pabhEscHtml(champion.name)}</p>
-      <p class="pabh-final-winner-score">${champion.score || 0} point${champion.score !== 1 ? 's' : ''}</p>
-    `;
+    if (isFinalTie) {
+      winnerEl.innerHTML = `
+        <div class="pabh-final-trophy">🤝</div>
+        <p class="pabh-final-winner-name">${pabhEscHtml(champions.map(c => c.name).join(' & '))}</p>
+        <p class="pabh-final-winner-score">${topScore} point${topScore !== 1 ? 's' : ''} each — it's a tie!</p>
+      `;
+    } else {
+      winnerEl.innerHTML = `
+        <div class="pabh-final-trophy">🎬</div>
+        <p class="pabh-final-winner-name">${pabhEscHtml(champion.name)}</p>
+        <p class="pabh-final-winner-score">${champion.score || 0} point${champion.score !== 1 ? 's' : ''}</p>
+      `;
+    }
   }
 
   const subtitleEl = document.getElementById('pabh-final-subtitle');
@@ -489,13 +540,20 @@ function renderStandings(containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
 
-  const sorted = [...PS.players].sort((a, b) => (b.score || 0) - (a.score || 0));
+  // Sort by score DESC, then by roundsWon DESC (consistent with renderFinalScreen)
+  const sorted = [...PS.players].sort((a, b) =>
+    (b.score || 0) - (a.score || 0) || (b.roundsWon || 0) - (a.roundsWon || 0)
+  );
   const rankClasses = ['first', 'second', 'third'];
+  const rankLabels  = ['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th'];
 
   el.innerHTML = sorted.map((p, i) => {
-    const rankClass = rankClasses[i] || 'other';
-    const rankLabel = i === 0 ? '1st' : i === 1 ? '2nd' : i === 2 ? '3rd' : `${i + 1}th`;
-    const isLeader  = i === 0;
+    // Walk back to the first player with the same score — tied players share a rank
+    let displayRank = i;
+    while (displayRank > 0 && (sorted[displayRank - 1].score || 0) === (p.score || 0)) displayRank--;
+    const rankClass = rankClasses[displayRank] || 'other';
+    const rankLabel = rankLabels[displayRank] || `${displayRank + 1}th`;
+    const isLeader  = displayRank === 0;
     return `
       <div class="pabh-score-row${isLeader ? ' leader' : ''}">
         <span class="pabh-score-rank ${rankClass}">${rankLabel}</span>
@@ -716,8 +774,10 @@ function bindPabhEvents() {
     startPabhTimer();
   });
 
-  // Timer: time's up (manual)
+  // Timer: time's up (manual) — guard prevents double-render if timer fires simultaneously
   document.getElementById('pabh-btn-timesup')?.addEventListener('click', () => {
+    if (pabhVoteScreenRendered) return;
+    pabhVoteScreenRendered = true;
     clearPabhTimer();
     renderVoteScreen();
     paabhGoTo('pabh-vote');
@@ -728,15 +788,14 @@ function bindPabhEvents() {
     const card = e.target.closest('.pabh-vote-card');
     if (!card) return;
 
-    // Determine voter — use pitcher's name to exclude; we need the voter identity
-    // Since this is a shared device game, we track votes by player order:
-    // The first eligible non-pitcher player who hasn't voted yet is the current voter.
-    const pitcher = getPitcherName();
+    // Shared device: first eligible non-pitcher who hasn't voted yet is the current voter
+    const pitcher  = getPitcherName();
     const eligible = PS.players.filter(p => p.name !== pitcher);
     const nextVoter = eligible.find(p => !PS.votes[p.name]);
     if (!nextVoter) return;
 
     const votedFor = card.dataset.player;
+    if (votedFor === nextVoter.name) return; // Fix #2: prevent self-voting
     handleVoteClick(nextVoter.name, votedFor);
   });
 
@@ -744,6 +803,15 @@ function bindPabhEvents() {
   document.getElementById('pabh-btn-lock-votes')?.addEventListener('click', () => {
     renderRoundResult();
     paabhGoTo('pabh-round-result');
+  });
+
+  // Vote: skip absent player — marks next voter as abstained so game can continue
+  document.getElementById('pabh-btn-skip-voter')?.addEventListener('click', () => {
+    const pitcher  = getPitcherName();
+    const eligible = PS.players.filter(p => p.name !== pitcher);
+    const nextVoter = eligible.find(p => !PS.votes[p.name]);
+    if (!nextVoter) return;
+    handleVoteClick(nextVoter.name, '__abstain__');
   });
 
   // Round result: next round

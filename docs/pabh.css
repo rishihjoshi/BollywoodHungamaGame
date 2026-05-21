@@ -309,12 +309,37 @@
   line-height: 1.2;
 }
 
+.pabh-vote-prompt {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  text-align: center;
+  margin: 0 0 8px;
+  min-height: 1.4em;
+}
+
 .pabh-vote-progress {
   font-family: var(--font-body);
   font-size: 0.8rem;
   color: var(--color-text-muted);
-  margin: 0 0 16px;
+  margin: 0 0 4px;
 }
+
+.btn-text-sm {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-bottom: 12px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-text-sm:active { opacity: 0.6; }
 
 .pabh-vote-grid {
   display: flex;
@@ -361,6 +386,12 @@
 
 .pabh-vote-card.voted .pabh-vote-checkmark {
   opacity: 1;
+}
+
+.pabh-vote-card.self-card {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 /* ── Round Result Screen ──────────────────────────────────── */
