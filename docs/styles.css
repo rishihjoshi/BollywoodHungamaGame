@@ -683,3 +683,101 @@ button, input { font-family: inherit; -webkit-tap-highlight-color: transparent; 
 .game-card-hero + * {
   margin-top: 16px;
 }
+
+/* ============================================================
+   PWA UPDATE BANNER + VERSION ROW
+   ============================================================ */
+
+.update-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: calc(10px + var(--safe-t)) calc(14px + var(--safe-r)) 10px calc(14px + var(--safe-l));
+  background: var(--color-surface-2);
+  border-bottom: 2px solid var(--color-gold);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  animation: update-banner-in 0.25s ease-out;
+}
+
+.update-banner.hidden { display: none; }
+
+@keyframes update-banner-in {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);      opacity: 1; }
+}
+
+/* Respect reduced-motion: skip the slide so the banner is shown at rest. */
+@media (prefers-reduced-motion: reduce) {
+  .update-banner { animation: none; }
+}
+
+.update-banner-icon { font-size: 1.25rem; line-height: 1; }
+
+.update-banner-msg {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.update-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.update-banner .btn-sm { min-height: 38px; }
+
+.update-banner-dismiss {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.app-version-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 18px 12px 8px;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.app-version-label {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.btn-check-update {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  padding: 7px 12px;
+  min-height: 36px;
+  cursor: pointer;
+}
+
+.btn-check-update:active { background: var(--color-surface-2); }
+
+.update-check-status {
+  flex-basis: 100%;
+  text-align: center;
+  color: var(--color-gold-dim);
+  min-height: 1em;
+}

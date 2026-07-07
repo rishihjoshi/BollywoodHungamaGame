@@ -1,4 +1,6 @@
-const CACHE_NAME = 'bollywood-hungama-v8';
+// Bump CACHE_NAME on every release so clients pick up fresh assets.
+// Keep the trailing version in sync with APP_VERSION (app.js) and version.json.
+const CACHE_NAME = 'bollywood-hungama-v9';
 
 const STATIC_ASSETS = [
   './',
@@ -8,6 +10,7 @@ const STATIC_ASSETS = [
   './pabh.js',
   './pabh.css',
   './manifest.json',
+  './version.json',
   './data/words.json',
   './data/pabh-data.json',
   './icons/icon.svg',
@@ -22,10 +25,14 @@ const STATIC_ASSETS = [
 ];
 
 self.addEventListener('install', event => {
+  // NOTE: we intentionally do NOT call skipWaiting() here. When an updated
+  // service worker is found it stays in the "waiting" state so the page can
+  // show a "Refresh to update" prompt and let the user choose when to apply
+  // it (see app.js). skipWaiting() is triggered on demand via a message.
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache =>
       Promise.allSettled(STATIC_ASSETS.map(url => cache.add(url).catch(() => {})))
-    ).then(() => self.skipWaiting())
+    )
   );
 });
 
@@ -37,13 +44,42 @@ self.addEventListener('activate', event => {
   );
 });
 
+// The page posts this when the user taps "Refresh" so the waiting worker
+// activates immediately; the page then reloads on 'controllerchange'.
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+
+  const url = new URL(event.request.url);
+
+  // version.json is the update signal — always try the network first so the
+  // app compares against the freshly-deployed version, not a cached copy.
+  if (url.pathname.endsWith('version.json')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(res => {
+          if (res.ok && url.origin === self.location.origin) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+          }
+          return res;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // Everything else: cache-first, falling back to the network.
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
       return fetch(event.request).then(res => {
-        if (res.ok && new URL(event.request.url).origin === self.location.origin) {
+        if (res.ok && url.origin === self.location.origin) {
           const clone = res.clone();
           caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
         }
