@@ -58,12 +58,19 @@ function movieFromHint(hint) {
   return hint.slice(0, idx).replace(/\s+\d{4}$/, '').trim();
 }
 
+/** Pull the first 4-digit year (19xx/20xx) from a hint, or null. */
+function yearFromHint(hint) {
+  const m = /\b(19|20)\d{2}\b/.exec(hint || '');
+  return m ? parseInt(m[0], 10) : null;
+}
+
 /** Build the TMDB search URL for a word entry. */
 function buildSearchUrl(word) {
   const base = `${TMDB_BASE}`;
   if (word.category === 'celeb') {
     const q = encodeURIComponent(word.word);
-    return `${base}/search/person?query=${q}&language=en-US&page=1`;
+    // include_adult=false avoids namesakes in adult titles
+    return `${base}/search/person?query=${q}&include_adult=false&language=en-US&page=1`;
   }
 
   // For all other categories, search by movie title
@@ -72,20 +79,51 @@ function buildSearchUrl(word) {
       ? word.word
       : movieFromHint(word.hint) || word.word;
 
-  const q = encodeURIComponent(movieTitle);
-  return `${base}/search/movie?query=${q}&language=en-US&page=1`;
+  const q      = encodeURIComponent(movieTitle);
+  const year   = yearFromHint(word.hint);
+  // primary_release_year strongly disambiguates same-named titles
+  // (e.g. "Black" 2005 vs Black Panther, "Don" 2006 vs Don Juan 1926).
+  const yearQP = year ? `&primary_release_year=${year}` : '';
+  return `${base}/search/movie?query=${q}&include_adult=false${yearQP}&language=en-US&page=1`;
 }
 
-/** Extract the best image URL from a TMDB search response. */
-function extractImageUrl(data, category) {
+/**
+ * Extract the best image URL from a TMDB search response.
+ * These are almost all Hindi films/stars, and the bare title/name often
+ * collides with unrelated foreign titles or namesakes, so we score results
+ * rather than blindly taking results[0]:
+ *   - movies: prefer original_language 'hi', then release year near the hint,
+ *     then TMDB popularity.
+ *   - people: prefer the most popular match (the famous Bollywood star beats
+ *     an obscure same-named person).
+ */
+function extractImageUrl(data, category, hintYear) {
   const results = data.results;
   if (!results || results.length === 0) return '';
 
-  const top = results[0];
   if (category === 'celeb') {
-    return top.profile_path ? `${IMG_BASE}${top.profile_path}` : '';
+    const best = [...results]
+      .filter(r => r.profile_path)
+      .sort((a, b) => (b.popularity || 0) - (a.popularity || 0))[0];
+    return best ? `${IMG_BASE}${best.profile_path}` : '';
   }
-  return top.poster_path ? `${IMG_BASE}${top.poster_path}` : '';
+
+  const scored = results
+    .filter(r => r.poster_path)
+    .map(r => {
+      const yr = (r.release_date || '').slice(0, 4);
+      const yearGap = hintYear && /^\d{4}$/.test(yr) ? Math.abs(+yr - hintYear) : 99;
+      return {
+        r,
+        hindi: r.original_language === 'hi' ? 0 : 1,
+        yearGap,
+        pop: r.popularity || 0,
+      };
+    })
+    .sort((a, b) =>
+      a.hindi - b.hindi || a.yearGap - b.yearGap || b.pop - a.pop);
+
+  return scored.length ? `${IMG_BASE}${scored[0].r.poster_path}` : '';
 }
 
 /** Fetch one TMDB search and return the image URL (or empty string). */
@@ -105,7 +143,7 @@ async function fetchImageUrl(word) {
     }
 
     const data = await res.json();
-    return extractImageUrl(data, word.category);
+    return extractImageUrl(data, word.category, yearFromHint(word.hint));
   } catch (err) {
     console.warn(`  Network error for "${word.word}": ${err.message} — skipping`);
     return '';
