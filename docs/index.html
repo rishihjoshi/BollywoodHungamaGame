@@ -30,6 +30,16 @@
 
 <canvas id="confetti-canvas"></canvas>
 
+<!-- PWA update banner — shown when a newer build is deployed -->
+<div class="update-banner hidden" id="update-banner" role="alert">
+  <span class="update-banner-icon">🔄</span>
+  <span class="update-banner-msg" id="update-banner-msg">A new version is available.</span>
+  <div class="update-banner-actions">
+    <button class="btn btn-primary btn-sm" id="btn-update-refresh">Refresh</button>
+    <button class="update-banner-dismiss" id="btn-update-dismiss" aria-label="Dismiss">✕</button>
+  </div>
+</div>
+
 <!-- Abandon-game confirmation modal -->
 <div class="abandon-modal hidden" id="abandon-modal">
   <div class="abandon-box">
@@ -108,7 +118,12 @@
 
     </div><!-- /.games-list -->
 
-    <div style="height:16px"></div>
+    <!-- Version / update check -->
+    <div class="app-version-row">
+      <span class="app-version-label" id="app-version-label">v—</span>
+      <button class="btn-check-update" id="btn-check-update">Check for updates</button>
+      <span class="update-check-status" id="update-check-status"></span>
+    </div>
   </div>
 
   <!-- ====================================================

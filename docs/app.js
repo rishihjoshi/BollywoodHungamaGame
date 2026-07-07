@@ -48,6 +48,12 @@ const MAX_PLAYERS   = 12;
 const STORAGE_GAME  = 'bh-game-v2';
 const STORAGE_SCORES= 'bh-scores-v2';
 
+// App version baked into this build. On each release, bump this together with
+// version.json ("version") and the CACHE_NAME suffix in sw.js. It's compared
+// against the freshly-fetched version.json to detect that an installed PWA is
+// running an older build than what's deployed on GitHub Pages.
+const APP_VERSION   = '9';
+
 // ============================================================
 // 3. STATE
 // ============================================================
@@ -836,6 +842,16 @@ function bindEvents() {
       else document.getElementById('btn-start-game').focus();
     }
   });
+
+  // ── PWA update banner + manual version check ──
+  const refreshBtn = document.getElementById('btn-update-refresh');
+  if (refreshBtn) refreshBtn.addEventListener('click', applyUpdate);
+
+  const dismissBtn = document.getElementById('btn-update-dismiss');
+  if (dismissBtn) dismissBtn.addEventListener('click', hideUpdateBanner);
+
+  const checkBtn = document.getElementById('btn-check-update');
+  if (checkBtn) checkBtn.addEventListener('click', () => checkForUpdate(true));
 }
 
 // ============================================================
@@ -855,12 +871,138 @@ async function initApp() {
   loadScores();
   await loadWords();
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(console.error);
-  }
+  initVersionUI();
+  initServiceWorker();
 
   bindEvents();
   resumePhase();
+}
+
+// ============================================================
+// 22. PWA VERSION / REFRESH
+// ------------------------------------------------------------
+// Detects when the installed PWA is running an older build than what's
+// deployed on GitHub Pages, and lets the user refresh to the latest.
+// Two independent signals feed the same "Update available" banner:
+//   1. Service worker: a new sw.js is byte-different → it installs and waits.
+//   2. version.json: fetched fresh from the network and compared to
+//      APP_VERSION (the version this running build was shipped with).
+// ============================================================
+
+let _swRegistration = null;
+let _reloadingForUpdate = false;
+
+/** Show/refresh the global "update available" banner. */
+function showUpdateBanner(latestVersion) {
+  const banner = document.getElementById('update-banner');
+  if (!banner) return;
+  const msg = document.getElementById('update-banner-msg');
+  if (msg) {
+    msg.textContent = latestVersion
+      ? `New version (v${latestVersion}) available.`
+      : 'A new version is available.';
+  }
+  banner.classList.remove('hidden');
+}
+
+function hideUpdateBanner() {
+  const banner = document.getElementById('update-banner');
+  if (banner) banner.classList.add('hidden');
+}
+
+/** Reflect the running version in the home-screen footer. */
+function initVersionUI() {
+  const label = document.getElementById('app-version-label');
+  if (label) label.textContent = `v${APP_VERSION}`;
+}
+
+/**
+ * Apply a pending update. If a waiting service worker exists we ask it to
+ * activate (which fires 'controllerchange' → reload). Otherwise we force a
+ * fresh fetch of sw.js and reload so the browser picks up the new build.
+ */
+async function applyUpdate() {
+  try {
+    if ('serviceWorker' in navigator) {
+      const reg = _swRegistration || await navigator.serviceWorker.getRegistration();
+      if (reg) {
+        await reg.update().catch(() => {});
+        if (reg.waiting) {
+          reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+          return; // 'controllerchange' handler will reload
+        }
+      }
+    }
+  } catch (_) { /* fall through to a plain reload */ }
+  _reloadingForUpdate = true;
+  window.location.reload();
+}
+
+/**
+ * Compare the deployed version.json against APP_VERSION.
+ * @param {boolean} manual  true when the user tapped "Check for updates".
+ */
+async function checkForUpdate(manual) {
+  const status = document.getElementById('update-check-status');
+  if (manual && status) status.textContent = 'Checking…';
+  try {
+    // Ask the SW to re-check sw.js too (covers the byte-diff signal).
+    if (_swRegistration) _swRegistration.update().catch(() => {});
+
+    const res = await fetch('./version.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('bad status');
+    const data = await res.json();
+    const latest = String(data.version);
+
+    if (latest !== APP_VERSION) {
+      showUpdateBanner(latest);
+      if (manual && status) status.textContent = `Update available: v${latest}`;
+      return true;
+    }
+    if (manual && status) status.textContent = "You're on the latest version ✓";
+  } catch (_) {
+    if (manual && status) status.textContent = 'Could not check right now.';
+  }
+  return false;
+}
+
+/** Register the service worker and wire up update detection. */
+function initServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+
+  // When the active worker changes (after the waiting one skips waiting),
+  // reload exactly once so the page runs the new assets.
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (_reloadingForUpdate) return;
+    _reloadingForUpdate = true;
+    window.location.reload();
+  });
+
+  navigator.serviceWorker.register('./sw.js').then(reg => {
+    _swRegistration = reg;
+
+    // A worker already waiting from a previous visit → update is ready now.
+    if (reg.waiting && navigator.serviceWorker.controller) showUpdateBanner();
+
+    // A new worker is being installed → watch it reach "installed".
+    reg.addEventListener('updatefound', () => {
+      const installing = reg.installing;
+      if (!installing) return;
+      installing.addEventListener('statechange', () => {
+        if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+          showUpdateBanner();
+        }
+      });
+    });
+
+    // Also compare version.json on startup for a user-friendly version number.
+    checkForUpdate(false);
+  }).catch(() => { /* SW unsupported/blocked — version.json check still runs below */ });
+
+  // Re-check when the app regains focus (e.g. reopened from the home screen).
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') checkForUpdate(false);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
